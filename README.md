@@ -7,7 +7,11 @@ This repository is part of a training and project series for Azure IoT Central. 
 
 [LINK: Training & Project Site for Raspberry Pi Gateway and Arduino Nano BLE Devices for Azure Iot Central](http://www.hackinmakin.com/Raspberry%20Pi%20Gateway%20and%20BLE/index.html)
 
-This project will enable a Raspberry Pi to act as a "Protocol Translation" Gateway connected to Azure IoT Central and send Telemerty on behalf of of the Devices we have created for this project. You should go back and create the Nano BLE Devices if you landed here out of sequence.
+This project will enable a Raspberry Pi to act as a "Protocol Translation" Gateway connected to Azure IoT Central and send Telemerty on behalf of of the Devices we have created for this project. 
+
+![Protocol Translation Gateway](./Assets/gateway-protocol.png)
+
+You should go back and create the Nano BLE Devices if you landed here out of sequence.
 
 ### Arduino Nano BLE 33 for Azure IoT Central
 Here is the link to the Github for the project "Arduino Nano BLE 33 for Azure IoT Central", you should also start and follow up to this point in the training link reference at the start of the Readme.
@@ -29,7 +33,7 @@ The development "toolchain" refers to all of the various tools, SDK's and bits w
 |---|---|
 | ![Python](./Assets/python-icon-100.png) | [LINK: Python 3 Installation Page](https://www.python.org/downloads/) - Pyhon is the programming language we will use to build applications for the Raspberry Pi. |
 | ![Visual Studio Code](./Assets/vs-code-icon-100.png) | [LINK: Visual Studio Code Installation Page](https://code.visualstudio.com/download) - Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. This is the IDE we will use to write code and deploy to the our BLE Devices and the Raspberry Pi Gateway.  |
-| ![PlatformIO](./Assets/platformio-icon-100.png) | [LINK: PlatformIO VS Code Install](https://platformio.org/platformio-ide) - PlatformIO is a cross-platform, cross-architecture, multiple framework, professional tool for embedded systems engineers and for software developers who write applications for embedded products. It works seamlessly with Visual Studio Code. |
+| ![Docker](./Assets/docker-icon-100.png) | [LINK: Docker Desktop Install](https://www.docker.com/products/docker-desktop) - Docker Desktop is an application for MacOS and Windows machines for the building and sharing of containerized applications. |
 
 Assuming everything is installed and working, Open Visual Studio Code and open the folder you cloned this repository into. You should see:
 
@@ -83,4 +87,7 @@ These are a set of tools we will use to develop our apps on the Raspberry Pi. Yo
 
 ![alt text](./Assets/vs-code-dcoker-sml.png "VS Code Dcoker")
 
-## [NEXT: Module 04 - Enabling Capabilities on the RPi](../Module04/README.md)
+### Install the following for Python Development
+These are a set of tools we will use to develop our apps on the Raspberry Pi. You can open the Extensions sidebar with "Shift+Ctrl+X) or click the icon in the side navigator bar.
+
+[LINK: Azure IoT EdgeHub Dev Tool](https://pypi.org/project/iotedgehubdev/)
