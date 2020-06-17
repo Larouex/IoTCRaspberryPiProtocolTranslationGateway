@@ -19,6 +19,23 @@ Here is the link to the Github for the project "Arduino Nano BLE 33 SENSE for Az
 
 [LINK: Arduino Nano BLE 33 SENSE for Azure IoT Central](https://github.com/Larouex/IoTCNanoBLESense33)
 
+## Setting up Your Development Toolchain
+The code in this repository depends on Ardunio, Visual Studio Code and PlatformIO.
+
+### Your Local Machine
+The development "toolchain" refers to all of the various tools, SDK's and bits we need to install on your machine to facilitate a smooth experience developing our BLE devices and the Raspberry Pi Gateway device. Our main development tool will be Visual Studio code. It has dependencies on tools from Arduino and other open source projects, but it will be the central place where all our development will occur making it easy to follow along  regardless of which operating system you are working on.
+
+| - | Install These Tools |
+|---|---|
+| ![Python](./Assets/python-icon-100.png) | [LINK: Python 3 Installation Page](https://www.python.org/downloads/) - Pyhon is the programming language we will use to build applications for the Raspberry Pi. |
+| ![Visual Studio Code](./Assets/vs-code-icon-100.png) | [LINK: Visual Studio Code Installation Page](https://code.visualstudio.com/download) - Visual Studio Code is a lightweight but powerful source code editor which runs on your desktop and is available for Windows, macOS and Linux. This is the IDE we will use to write code and deploy to the our BLE Devices and the Raspberry Pi Gateway.  |
+| ![PlatformIO](./Assets/platformio-icon-100.png) | [LINK: PlatformIO VS Code Install](https://platformio.org/platformio-ide) - PlatformIO is a cross-platform, cross-architecture, multiple framework, professional tool for embedded systems engineers and for software developers who write applications for embedded products. It works seamlessly with Visual Studio Code. |
+
+Assuming everything is installed and working, Open Visual Studio Code and open the folder you cloned this repository into. You should see:
+
+![Start](./Assets/vscode-startup-with-platformio.png)
+
+
 ## Setup the Development Toolchain
 
 ### Install Git
@@ -32,7 +49,7 @@ This is the IDE we will use to write code, deploy to the RPi, etc.
 [LINK: Visual Studio Code Installation Page](https://code.visualstudio.com/download)
 
 ### Install Python
-Pyhon is the language we will use to build applications for the Raspberry Pi
+Pyhon is the programming language we will use to build applications for the Raspberry Pi
 
 From the Python Org: 
 * Python is powerful... and fast;
@@ -58,10 +75,12 @@ On Windows (from a CMD window or Powershell):
 ### Install all the Tools for Visual Studio Code
 These are a set of tools we will use to develop our apps on the Raspberry Pi. You can open the Extensions sidebar with "Shift+Ctrl+X) or click the icon in the side navigator bar.
 
-![alt text](../Assets/vs-code-python.png "VS Code Python")
+![alt text](./Assets/vs-code-python-sml.png.png "VS Code Python")
 
-![alt text](../Assets/vs-code-remote-ssh.png "VS Code Remote SSH")
+![alt text](./Assets/vs-code-remote-ssh-sml.png "VS Code Remote SSH")
 
-![alt text](../Assets/vs-code-remote-edit.png "VS Code Remote SSH Edit")
+![alt text](./Assets/vs-code-remote-edit-sml.png "VS Code Remote SSH Edit")
+
+![alt text](./Assets/vs-code-dcoker-sml.png "VS Code Dcoker")
 
 ## [NEXT: Module 04 - Enabling Capabilities on the RPi](../Module04/README.md)
