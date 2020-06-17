@@ -9,7 +9,7 @@ This repository is part of a training and project series for Azure IoT Central. 
 
 This project will enable a Raspberry Pi to act as a "Protocol Translation" Gateway connected to Azure IoT Central and send Telemerty on behalf of of the Devices we have created for this project. 
 
-![Protocol Translation Gateway](./Assets/gateway-protocol.png)
+![Protocol Translation Gateway](./Assets/gateway-protocol-lrg.png)
 
 You should go back and create the Nano BLE Devices if you landed here out of sequence.
 
