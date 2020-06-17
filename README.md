@@ -11,7 +11,7 @@ This project will enable a Raspberry Pi to act as a "Protocol Translation" Gatew
 
 ![Protocol Translation Gateway](./Assets/gateway-protocol-lrg.png)
 
-You should go back and create the Nano BLE Devices if you landed here out of sequence.
+You may wan go back and do the projects for the Nano BLE Devices if you landed here out of sequence.
 
 ### Arduino Nano BLE 33 for Azure IoT Central
 Here is the link to the Github for the project "Arduino Nano BLE 33 for Azure IoT Central", you should also start and follow up to this point in the training link reference at the start of the Readme.
