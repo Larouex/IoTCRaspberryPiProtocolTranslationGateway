@@ -18,10 +18,40 @@ Here is the link to the Github for the project "Arduino Nano BLE 33 for Azure Io
 
 [LINK: Arduino Nano BLE 33 for Azure IoT Central](https://github.com/Larouex/IoTCNanoBLE33)
 
+We will be working with the following charactertics from our Nano BLE 33 Device and doing Protcol Translation to IoT Central...
+
+* <b>VERSION</b>
+* <b>BATTERY CHARGED</b>
+* <b>TELEMETRY FREQUENCY</b>
+* <b>ACCELEROMETER</b>
+* <b>GYROSCOPE</b>
+* <b>MAGNETOMETER</b>
+* <b>ORIENTATION</b>
+* <b>RGB LED</b>
+
 ### Arduino Nano BLE 33 SENSE for Azure IoT Central
 Here is the link to the Github for the project "Arduino Nano BLE 33 SENSE for Azure IoT Central", you should also start and follow up to this point in the training link reference at the start of the Readme.
 
 [LINK: Arduino Nano BLE 33 SENSE for Azure IoT Central](https://github.com/Larouex/IoTCNanoBLESense33)
+
+We will be working with the following charactertics from our Nano BLE 33 SENSE Device and doing Protcol Translation to IoT Central...
+
+* <b>VERSION</b>
+* <b>BATTERY CHARGED</b>
+* <b>TELEMETRY FREQUENCY</b>
+* <b>ACCELEROMETER</b>
+* <b>GYROSCOPE</b>
+* <b>MAGNETOMETER</b>
+* <b>ORIENTATION</b>
+* <b>RGB LED</b>
+* <b>BAROMETER</b>
+* <b>TEMPERATURE</b>
+* <b>HUMIDITY</b>
+* <b>MICROPHONE</b>
+* <b>AMBIENTLIGHT</b>
+* <b>COLOR</b>
+* <b>PROXIMITY</b>
+* <b>GESTURE</b>
 
 ## Setting up Your Development Toolchain
 The code in this repository depends on Ardunio, Visual Studio Code and PlatformIO.
