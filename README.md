@@ -118,6 +118,9 @@ Here is how we will connect to the Raspberry Pi...
 
 #### Create our Project Folder on the Raspberry Pi
 
+* Click on "New Folder" icon
+* Type in "Projects" and press enter to create the folder
+
   ![alt text](./Assets/vs-code-connect-remote-ssh-pi-create-project-folder.png "Pi SSH Connect Create Project Folder") 
 
 #### Update Python on the Raspberry Pi
@@ -141,9 +144,9 @@ http://www.bluez.org/
 
 ```` bash
 cd ~
-wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.37.tar.xz
-tar xvf bluez-5.37.tar.xz
-cd bluez-5.37
+wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.54.tar.xz
+tar xvf bluez-5.54.tar.xz
+cd bluez-5.54
 sudo apt-get update
 sudo apt-get install -y libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
 ./configure --enable-library
