@@ -222,3 +222,13 @@ Once the bluez service is running you can check the experimental features are en
            └─1022 /usr/local/libexec/bluetooth/bluetoothd --experimental
 ````
 
+### Getting Startd with Bluetooth and Gateway Coding
+Now that we have everything ready to go on our desktop and Raspberry Pi, let's get started!
+
+```` bash
+cd ~
+cd Projects
+git clone https://github.com/Larouex/IoTCRaspberryPiProtocolTranslationGateway.git
+cd IoTCRaspberryPiProtocolTranslationGateway
+````
+
