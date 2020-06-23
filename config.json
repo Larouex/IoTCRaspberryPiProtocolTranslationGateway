@@ -1,0 +1,15 @@
+{
+    "cacheConnection": false,
+    "gateways": [
+        {"name": "gatewayRoot", "parent": "", "leafDeviceCount": 5, "leafDevicePrefix": "gatewayRoot_device", "leafDeviceTemplateId": "db138f5d-bbad-4633-9b56-ec3e1e848f70/1.0.0", "messageColor": "#00ff00"},
+        {"name": "gateway1", "parent": "gatewayRoot", "leafDeviceCount": 5, "leafDevicePrefix": "gateway1_device", "leafDeviceTemplateId": "db138f5d-bbad-4633-9b56-ec3e1e848f70/1.0.0", "messageColor": "#005fd7"},
+        {"name": "gateway2", "parent": "gatewayRoot", "leafDeviceCount": 5, "leafDevicePrefix": "gateway2_device", "leafDeviceTemplateId": "db138f5d-bbad-4633-9b56-ec3e1e848f70/1.0.0", "messageColor": "#5f00d7"},
+        {"name": "gateway1_1", "parent": "gateway1", "leafDeviceCount": 5, "leafDevicePrefix": "gateway1_1_device", "leafDeviceTemplateId": "db138f5d-bbad-4633-9b56-ec3e1e848f70/1.0.0", "messageColor": "#af8700"},
+        {"name": "gateway2_1", "parent": "gateway2", "leafDeviceCount": 5, "leafDevicePrefix": "gateway2_1_device", "leafDeviceTemplateId": "db138f5d-bbad-4633-9b56-ec3e1e848f70/1.0.0", "messageColor": "#d7d700"},
+        {"name": "gateway2_1_1", "parent": "gateway2_1", "leafDeviceCount": 5, "leafDevicePrefix": "gateway2_1_1_device", "leafDeviceTemplateId": "db138f5d-bbad-4633-9b56-ec3e1e848f70/1.0.0", "messageColor": "#ff8700"},
+        {"name": "gateway2_1_2", "parent": "gateway2_1", "leafDeviceCount": 5, "leafDevicePrefix": "gateway2_1_2_device", "leafDeviceTemplateId": "db138f5d-bbad-4633-9b56-ec3e1e848f70/1.0.0", "messageColor": "#8787af"}
+    ],
+    "use_websockets": true,
+    "terminate": false,
+    "use_cached_credentials": false
+}
