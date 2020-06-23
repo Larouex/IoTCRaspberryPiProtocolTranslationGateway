@@ -135,8 +135,9 @@ We will be using the lastest version of BlueZ
 
 Visit the bluez download page and copy the link to the latest source release (under the User Space BlueZ Package section)
 
-Latest version since this documated was updated. Bet sure to get the latest.
-http://www.kernel.org/pub/linux/bluetooth/bluez-5.37.tar.xz
+Latest version (5.54) since this documentation was updated. Bet sure to get the latest.
+http://www.bluez.org/
+
 
 ```` bash
 cd ~
