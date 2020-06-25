@@ -236,12 +236,11 @@ hci0:   Type: Primary  Bus: UART
 
 Next up I started monitoring one of my Nano BLE 33 Devices in Advertising mode and ran this command... 
 ```` bash
-sudo hcitoolmlescan
+sudo hcitool lescan
 ````
+You can the device is detected in the scan from the Raspberry Pi and we are up and working!
 
 ![alt text](./Assets/le-scan-terminal-window.png "le scan") 
-
-You can the device is detected in the scan from the Raspberry Pi and we are up and working!
 
 ### Getting Started with Bluetooth and Gateway Coding
 Now that we have everything ready to go on our desktop and Raspberry Pi, let's get started!
