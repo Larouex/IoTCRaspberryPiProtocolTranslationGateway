@@ -242,6 +242,12 @@ You can the device is detected in the scan from the Raspberry Pi and we are up a
 
 ![alt text](./Assets/le-scan-terminal-window.png "le scan") 
 
+<b>NOTE:</b> If you get an error with LE Scan, try these commands...
+```` bash
+sudo hciconfig hci0 down
+sudo hciconfig hci0 up
+````
+
 ### Getting Started with Bluetooth and Gateway Coding
 Now that we have everything ready to go on our desktop and Raspberry Pi, let's get started!
 
