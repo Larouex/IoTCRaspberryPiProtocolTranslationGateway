@@ -222,9 +222,31 @@ Once the bluez service is running you can check the experimental features are en
            └─1022 /usr/local/libexec/bluetooth/bluetoothd --experimental
 ````
 
-### Getting Startd with Bluetooth and Gateway Coding
+### Verify that Bluetooth is Working for LE
+
+```` bash
+hciconfig
+
+hci0:   Type: Primary  Bus: UART
+        BD Address: DC:A6:32:B1:BD:39  ACL MTU: 1021:8  SCO MTU: 64:1
+        UP RUNNING 
+        RX bytes:1710 acl:0 sco:0 events:118 errors:0
+        TX bytes:7521 acl:0 sco:0 commands:118 errors:0
+````
+
+Next up I started monitoring one of my Nano BLE 33 Devices in Advertising mode and ran this command... 
+```` bash
+sudo hcitoolmlescan
+````
+
+![alt text](./Assets/le-scan-terminal-window.png "le scan") 
+
+You can the device is detected in the scan from the Raspberry Pi and we are up and working!
+
+### Getting Started with Bluetooth and Gateway Coding
 Now that we have everything ready to go on our desktop and Raspberry Pi, let's get started!
 
+First off let's clone this repository to our Raspberry Pi...
 ```` bash
 cd ~
 cd Projects
