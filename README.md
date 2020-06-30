@@ -221,4 +221,23 @@ Once the bluez service is running you can check the experimental features are en
    CGroup: /system.slice/bluetooth.service
            └─1022 /usr/local/libexec/bluetooth/bluetoothd --experimental
 ````
+### Install Libraries
 
+Install the libraries needed for the Raspberry Pi Gateway...
+````bash
+cd ~/Projects/IoTCRaspberryPiProtocolTranslationGateway/
+pip3 install -r requirements.txt
+````
+Setup all our Bluetooth Python Libraries for BlueZ
+````bash
+sudo apt-get install bluez python-bluez
+sudo apt-get install libbluetooth-dev
+````
+
+sudo python3 setup.py install
+
+wget https://github.com/pybluez/pybluez/archive/master.tar.gz
+tar xvf master.tar.gz
+cd pybluez=master
+sudo apt-get install libbluetooth-dev
+sudo python3 setup.py install
