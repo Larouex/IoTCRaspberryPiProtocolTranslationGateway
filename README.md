@@ -223,6 +223,7 @@ Once the bluez service is running you can check the experimental features are en
 ````
 ### Install Libraries
 
+<<<<<<< HEAD
 Install the libraries needed for the Raspberry Pi Gateway...
 ````bash
 cd ~/Projects/IoTCRaspberryPiProtocolTranslationGateway/
@@ -241,3 +242,42 @@ tar xvf master.tar.gz
 cd pybluez=master
 sudo apt-get install libbluetooth-dev
 sudo python3 setup.py install
+=======
+### Verify that Bluetooth is Working for LE
+
+```` bash
+hciconfig
+
+hci0:   Type: Primary  Bus: UART
+        BD Address: DC:A6:32:B1:BD:39  ACL MTU: 1021:8  SCO MTU: 64:1
+        UP RUNNING 
+        RX bytes:1710 acl:0 sco:0 events:118 errors:0
+        TX bytes:7521 acl:0 sco:0 commands:118 errors:0
+````
+
+Next up I started monitoring one of my Nano BLE 33 Devices in Advertising mode and ran this command... 
+```` bash
+sudo hcitool lescan
+````
+You can the device is detected in the scan from the Raspberry Pi and we are up and working!
+
+![alt text](./Assets/le-scan-terminal-window.png "le scan") 
+
+<b>NOTE:</b> If you get an error with LE Scan, try these commands...
+```` bash
+sudo hciconfig hci0 down
+sudo hciconfig hci0 up
+````
+
+### Getting Started with Bluetooth and Gateway Coding
+Now that we have everything ready to go on our desktop and Raspberry Pi, let's get started!
+
+First off let's clone this repository to our Raspberry Pi...
+```` bash
+cd ~
+cd Projects
+git clone https://github.com/Larouex/IoTCRaspberryPiProtocolTranslationGateway.git
+cd IoTCRaspberryPiProtocolTranslationGateway
+````
+
+>>>>>>> d50ef38d4325c70d2c7d5b5966b2e4b9ba7e8a63
