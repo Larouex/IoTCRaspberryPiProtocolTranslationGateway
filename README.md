@@ -223,7 +223,6 @@ Once the bluez service is running you can check the experimental features are en
 ````
 ### Install Libraries
 
-<<<<<<< HEAD
 Install the libraries needed for the Raspberry Pi Gateway...
 ````bash
 cd ~/Projects/IoTCRaspberryPiProtocolTranslationGateway/
@@ -241,8 +240,12 @@ wget https://github.com/pybluez/pybluez/archive/master.tar.gz
 tar xvf master.tar.gz
 cd pybluez=master
 sudo apt-get install libbluetooth-dev
+
+sudo apt-get install libglib2.0-dev
+
+sudo pip install bluepy
+
 sudo python3 setup.py install
-=======
 ### Verify that Bluetooth is Working for LE
 
 ```` bash
@@ -279,5 +282,19 @@ cd Projects
 git clone https://github.com/Larouex/IoTCRaspberryPiProtocolTranslationGateway.git
 cd IoTCRaspberryPiProtocolTranslationGateway
 ````
+##  Install required packages
+```` bash
+sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
+   pkg-config libgl1-mesa-dev libgles2-mesa-dev \
+   python-setuptools libgstreamer1.0-dev git-core \
+   gstreamer1.0-plugins-{bad,base,good,ugly} \
+   gstreamer1.0-{omx,alsa} python-dev libmtdev-dev \
+   xclip xsel libjpeg-dev libgpiod2
+````
 
->>>>>>> d50ef38d4325c70d2c7d5b5966b2e4b9ba7e8a63
+9. Set up a virtual environment and install required python packages
+```` bash
+python3 -m venv .env
+source .env/bin/activate
+pip3 install -r requirements.txt
+````

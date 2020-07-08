@@ -1,0 +1,86 @@
+{
+  "DeviceName": "larouex-ble-0001",
+  "ServiceUUID": "6F165338-0001-43B9-837B-41B1A3C86EC1",
+  "Characteristics": [
+    {
+      "Name":"VERSION_CHARACTERISTIC",
+      "UUID": "1001",
+      "Description": "1002"
+    },
+    {
+      "Name":"BATTERYCHARGED_CHARACTERISTIC",
+      "UUID": "2001",
+      "Description": "2002"
+    },
+    {
+      "Name":"TELEMETRYFREQUENCY_CHARACTERISTIC",
+      "UUID": "3001",
+      "Description": "3002"
+    },
+    {
+      "Name":"ACCELEROMETER_CHARACTERISTIC",
+      "UUID": "4001",
+      "Description": "4002"
+    },
+    {
+      "Name":"GYROSCOPE_CHARACTERISTIC",
+      "UUID": "5001",
+      "Description": "5002"
+    },
+    {
+      "Name":"MAGNETOMETER_CHARACTERISTIC",
+      "UUID": "6001",
+      "Description": "6002"
+    },
+    {
+      "Name":"ORIENTATION_CHARACTERISTIC",
+      "UUID": "7001",
+      "Description": "7002"
+    },
+    {
+      "Name":"RGBLED_CHARACTERISTIC",
+      "UUID": "8001",
+      "Description": "8002"
+    },
+    {
+      "Name":"BAROMETER_CHARACTERISTIC",
+      "UUID": "9001",
+      "Description": "9002"
+    },
+    {
+      "Name":"TEMPERATURE_CHARACTERISTIC",
+      "UUID": "1101",
+      "Description": "1102"
+    },
+    {
+      "Name":"HUMIDITY_CHARACTERISTIC",
+      "UUID": "1201",
+      "Description": "1202"
+    },
+    {
+      "Name":"MICROPHONE_CHARACTERISTIC",
+      "UUID": "1301",
+      "Description": "1302"
+    },
+    {
+      "Name":"AMBIENTLIGHT_CHARACTERISTIC",
+      "UUID": "1401",
+      "Description": "1402"
+    },
+    {
+      "Name":"COLOR_CHARACTERISTIC",
+      "UUID": "1501",
+      "Description": "1502"
+    },
+    {
+      "Name":"PROXIMITY_CHARACTERISTIC",
+      "UUID": "1601",
+      "Description": "1602"
+    },
+    {
+      "Name":"GESTURE_CHARACTERISTIC",
+      "UUID": "1701",
+      "Description": "1702"
+    }
+  ]
+}
