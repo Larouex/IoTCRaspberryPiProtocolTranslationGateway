@@ -16,6 +16,10 @@
         "Loaded": "Loaded Devices Cache file: {0}",
         "Updated": "Updated Devices Cache file: {0}"
       },
+      "Secrets":{
+        "Loaded": "Loaded Secrets file: {0}",
+        "Updated": "Updated Secrets file: {0}"
+      },
       "NanoBLESense":{
           "Loaded": "Loaded NanoBLESense Characteristics file: {0}",
           "Updated": "Updated NanoBLESense Characteristics file: {0}"

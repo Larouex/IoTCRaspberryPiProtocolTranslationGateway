@@ -88,6 +88,13 @@ These are a set of tools we will use to develop our apps on the Raspberry Pi. Yo
 
 ![alt text](./Assets/vs-code-docker-sml.png "VS Code Docker")
 
+### Install the Azure CLI Tooling
+The Azure command-line interface (Azure CLI) is a set of commands used to create and manage Azure resources. The Azure CLI is available across Azure services and is designed to get you working quickly with Azure, with an emphasis on automation.
+
+Click the link below and install on your Desktop environment.
+
+[LINK: Install the Azure CLI Tooling](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
+
 
 ## Setting up the Development Environment on the Raspberry Pi
 We will need to setup our Raspberry Pi with all of the capabilities we will need to develop for our Protcol Translation Gateway.
@@ -376,6 +383,7 @@ The fist thing we will do is copy the "secrets_template.json" to a new file name
 * Repeat for all the secrets we setup previously and put into the right fields!
 
 <b>Your file should look like this when completed...</b>
+
 ````json
 {
   "UseKeyVault": true,
@@ -439,6 +447,22 @@ Save the file and you can ignore the Key Vault section.
 
 <b>IMPORTANT: Make sure to check your .gitignore to verify that "secrets.json" is in the list so it does not get checked in! The file should be dithered in your Visual Studio Code Explorer window.</b>
 
+## Get Your Credentials for Azure Login
+
+* Open a Terminal or Powershell session
+* Login to the Azure CLI...
+
+````bash
+az login
+````
+
+* If the CLI can open your default browser, it will do so and load an Azure sign-in page.
+* Otherwise, open a browser page at https://aka.ms/devicelogin and enter the authorization code displayed in your terminal.
+* Sign in with your account credentials in the browser.
+
+````bash
+az ad sp create-for-rbac --name http://raspberry-pi-protocol-translation-gateway --skip-assignment
+````
 
 
 

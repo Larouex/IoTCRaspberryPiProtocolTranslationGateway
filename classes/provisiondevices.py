@@ -9,9 +9,11 @@
 #   (c) 2020 Larouex Software Design LLC
 #   This code is licensed under MIT license (see LICENSE.txt for details)    
 # ==================================================================================
-import time, logging, string, json
+import time, logging, string, json, os
 from bluepy.btle import Scanner, DefaultDelegate
 from classes.devicescache import DevicesCache
+from azure.keyvault.certificates import CertificateClient, CertificatePolicy,CertificateContentType, WellKnownIssuerNames 
+from azure.identity import DefaultAzureCredential
 
 # -------------------------------------------------------------------------------
 #   Delegate Class to Handle Discovered Devices
