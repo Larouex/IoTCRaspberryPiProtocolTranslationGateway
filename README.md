@@ -317,6 +317,123 @@ Create our Connection Secrets...
 | raspberry-pi-protocol-translation-gateway-saskey-gateway-primary | Admin, Device Connection, Azure Edge devices, View Keys, Copy [Primary Key] | Client Secret |
 | raspberry-pi-protocol-translation-gateway-saskey-gateway-secondary | Admin, Device Connection, Azure Edge devices, View Keys, Copy [Secondary Key] | Client Secret |
 
+### Configure our Secrets for Local Development
+There is a file in the root folder of the project named "secrets_template.json" and this file outlines the shape of Json we use to retreive secrets. It supports local and Key Vault usage. 
+
+````json
+{
+  "UseKeyVault": true,
+  "LocalSecrets": {
+    "ScopeId": "",
+    "DeviceConnect":{
+      "SaSKeys":{
+          "Primary": "",
+          "Secondary": ""
+      },
+      "GatewayConnect":{
+        "SaSKeys":{
+            "Primary": "",
+            "Secondary": ""
+        }
+      }
+    }
+  },
+  "KeyVaultSecrets":{
+    "KeyVaultUri": "",
+    "ScopeId": "",
+    "DeviceConnect":{
+      "SaSKeys":{
+          "Primary": "",
+          "Secondary": ""
+      },
+      "GatewayConnect":{
+        "SaSKeys":{
+            "Primary": "",
+            "Secondary": ""
+        }
+      }
+    }
+  }
+}
+````
+
+The fist thing we will do is copy the "secrets_template.json" to a new file named "secrets.json" in the root folder of the project. Open this file in Visual Studio Code and let's get to configuring the options.
+
+#### I want to use the security and awesomeness of Key Vault!
+
+* Set "UseKeyVault" to true
+* From the Azure Portal, Goto your Key Vault Resource
+* Goto Secrets
+* Click onto your secret for Scope ID that we set up previously
+* Click the copy button next to the "Secret Identifier"
+* Paste it into the "KeyVaultUri" in the "secrets.json" file.
+* Highlight and cut the remainder of url after .../secrets/ 
+* Paste into the ScopeId field
+* Repeat for all the secrets we setup previously and put into the right fields!
+
+<b>Your file should look like this when completed...</b>
+````json
+{
+  "UseKeyVault": true,
+  "LocalSecrets": {
+    "ScopeId": "",
+    "DeviceConnect":{
+      "SaSKeys":{
+          "Primary": "",
+          "Secondary": ""
+      },
+      "GatewayConnect":{
+        "SaSKeys":{
+            "Primary": "",
+            "Secondary": ""
+        }
+      }
+    }
+  },
+  "KeyVaultSecrets":{
+    "KeyVaultUri": "https://<your-kv-resource-name>.vault.azure.net/secrets/ ",
+    "ScopeId": "raspberry-pi-protocol-translation-gateway-scopeid/<your id number>",
+    "DeviceConnect":{
+      "SaSKeys":{
+          "Primary": "raspberry-pi-protocol-translation-gateway-saskey-device-primary/<your id number>",
+          "Secondary": "raspberry-pi-protocol-translation-gateway-saskey-device-secondary/<your id number>",
+      },
+      "GatewayConnect":{
+        "SaSKeys":{
+            "Primary": "raspberry-pi-protocol-translation-gateway-saskey-gateway-primary/<your id number>",
+            "Secondary": "raspberry-pi-protocol-translation-gateway-saskey-gateway-secondary/<your id number>",
+        }
+      }
+    }
+  }
+}
+````
+
+#### I don't want to use Key Vault!
+If you are working locally and do not want to implement the security and awesomeness of Key Vault, then go ahead and set "UseKeyVault" to false. Copy all our your SaS key values from the Admin, Device Connection page in IoT Central...
+
+````json
+{
+  "UseKeyVault": false,
+   "LocalSecrets": {
+    "ScopeId": "",
+    "DeviceConnect":{
+      "SaSKeys":{
+          "Primary": "",
+          "Secondary": ""
+      },
+      "GatewayConnect":{
+        "SaSKeys":{
+            "Primary": "",
+            "Secondary": ""
+        }
+      }
+    }
+
+````
+Save the file and you can ignore the Key Vault section.
+
+<b>IMPORTANT: Make sure to check your .gitignore to verify that "secrets.json" is in the list so it does not get checked in! The file should be dithered in your Visual Studio Code Explorer window.</b>
 
 
 
