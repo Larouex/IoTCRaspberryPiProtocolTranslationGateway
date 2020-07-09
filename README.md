@@ -306,8 +306,7 @@ I am going to assume the following when we work with Azure and Azure Portal...
 * That you have sufficient permissions in your Azure account to create Resource Groups and Resources
 * That you are familiar creating and using resources with the Azure CLI or the Azure Portal [LINK: Azure Portal](https://portal.azure.com/))
 
-
-Create our Connection Secrets...
+### Create our Connection Secrets...
 
 | Name | Secret (IoT Central Admin [Device Connection] Page)  | Content Type |
 |---|---|---|
@@ -316,6 +315,11 @@ Create our Connection Secrets...
 | raspberry-pi-protocol-translation-gateway-saskey-device-secondary | Admin, Device Connection, Devices, View Keys, Copy [Secondary Key] | Client Secret |
 | raspberry-pi-protocol-translation-gateway-saskey-gateway-primary | Admin, Device Connection, Azure Edge devices, View Keys, Copy [Primary Key] | Client Secret |
 | raspberry-pi-protocol-translation-gateway-saskey-gateway-secondary | Admin, Device Connection, Azure Edge devices, View Keys, Copy [Secondary Key] | Client Secret |
+
+Once these are all created in Key Vault, your list should look like this...
+![alt text](./Assets/azure-portal-key-vault-secrets-list.png "Azure Portal Key Vault Secrets List") 
+
+https://docs.microsoft.com/en-us/azure/key-vault/certificates/quick-create-python
 
 ### Configure our Secrets for Local Development
 There is a file in the root folder of the project named "secrets_template.json" and this file outlines the shape of Json we use to retreive secrets. It supports local and Key Vault usage. 
@@ -359,7 +363,7 @@ There is a file in the root folder of the project named "secrets_template.json" 
 
 The fist thing we will do is copy the "secrets_template.json" to a new file named "secrets.json" in the root folder of the project. Open this file in Visual Studio Code and let's get to configuring the options.
 
-#### I want to use the security and awesomeness of Key Vault!
+### I want to use the security and awesomeness of Key Vault!
 
 * Set "UseKeyVault" to true
 * From the Azure Portal, Goto your Key Vault Resource
@@ -409,7 +413,7 @@ The fist thing we will do is copy the "secrets_template.json" to a new file name
 }
 ````
 
-#### I don't want to use Key Vault!
+### I don't want to use Key Vault!
 If you are working locally and do not want to implement the security and awesomeness of Key Vault, then go ahead and set "UseKeyVault" to false. Copy all our your SaS key values from the Admin, Device Connection page in IoT Central...
 
 ````json
@@ -440,7 +444,3 @@ Save the file and you can ignore the Key Vault section.
 
 
 
-Once these are all created in Key Vault, your list should look like this...
-![alt text](./Assets/azure-portal-key-vault-secrets-list.png "Azure Portal Key Vault Secrets List") 
-
-https://docs.microsoft.com/en-us/azure/key-vault/certificates/quick-create-python
