@@ -1,0 +1,17 @@
+{
+    "provisioningHost": "global.azure-devices-provisioning.net",
+    "idScope": "0ne0007E86E",
+    "gatewayTemplateId": "jprxm6/1.2.0",
+    "sasKey": "l7r52wdv4jEbSU2QCOYz/vfea5cTSKMv48uA9QlB8rP6H0pvS0bI7M9YEU3ZwurvQeBh3oWIGYTjfHutiZXnDg=="
+}
+{
+    "LORA_DR": 5,
+    "LORA_BAND": "US915",
+    "LORA_SETMASK": true,
+    "WIFI_SSID": "SSID3",
+    "WIFI_PASSWORD": "PASSWORD2",
+    "TTN_APP_EUI": "70B3D57ED002ACBE",
+    "TTN_APP_KEY": "8A849488740C8E3F7CB54038F1E79951",
+    "PM_SLOPE": 1.0,
+    "PM_OFFSET": 0.0
+  }
