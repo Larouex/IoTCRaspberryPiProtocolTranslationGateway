@@ -11,4 +11,6 @@ wifi
 RPi.GPIO
 asyncio
 azure.iot.device
+azure.identity
+azure.keyvault.certificates
 bluepy

@@ -13,7 +13,7 @@ This project will enable a Raspberry Pi to act as a "Protocol Translation" Gatew
 
 You may want to try the supporting projects for the Nano BLE Devices if you landed here out of sequence.
 
-### Arduino Nano BLE 33 for Azure IoT Central
+## Arduino Nano BLE 33 for Azure IoT Central
 Here is the link to the Github for the project "Arduino Nano BLE 33 for Azure IoT Central", you should also start and follow up to this point in the training link reference at the start of the Readme.
 
 [LINK: Arduino Nano BLE 33 for Azure IoT Central](https://github.com/Larouex/IoTCNanoBLE33)
@@ -29,7 +29,7 @@ We will be working with the following charactertics from our Nano BLE 33 Device 
 * <b>ORIENTATION</b>
 * <b>RGB LED</b>
 
-### Arduino Nano BLE 33 SENSE for Azure IoT Central
+## Arduino Nano BLE 33 SENSE for Azure IoT Central
 Here is the link to the Github for the project "Arduino Nano BLE 33 SENSE for Azure IoT Central", you should also start and follow up to this point in the training link reference at the start of the Readme.
 
 [LINK: Arduino Nano BLE 33 SENSE for Azure IoT Central](https://github.com/Larouex/IoTCNanoBLESense33)
@@ -89,18 +89,18 @@ These are a set of tools we will use to develop our apps on the Raspberry Pi. Yo
 ![alt text](./Assets/vs-code-docker-sml.png "VS Code Docker")
 
 
-### Setting up the Development Environment on the Raspberry Pi
-We will need to setup our Raspberry Pi with all of the capbailities we will need to develop for our Protcol Translation Gateway.
+## Setting up the Development Environment on the Raspberry Pi
+We will need to setup our Raspberry Pi with all of the capabilities we will need to develop for our Protcol Translation Gateway.
 
 #### Connecting to the Raspberry Pi using SSH
 We will be connecting to the Raspberry Pi using the remote SSH capability of Visual Studio Code that we installed as part of our development toolchain. When you set the RPi up, we enabled the device to connect to our Wifi network. 
 
 Now we want to find the IP address of our RPi and connect to via VS Code's Remote SSH tools. This will let us develop our code and test our application working remotely connected to the device.
 
-Here is the documetnation on the extension for VS Code...
+* Here is the documetnation on the extension for VS Code...
 [LINK: Remote Development](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack)
 
-Here is how we will connect to the Raspberry Pi...
+* Here is how we will connect to the Raspberry Pi...
 [LINK: Remote development over SSH](https://code.visualstudio.com/remote-tutorials/ssh/getting-started)
 
 #### Connect to the Raspberry Pi
@@ -232,20 +232,16 @@ Setup all our Bluetooth Python Libraries for BlueZ
 ````bash
 sudo apt-get install bluez python-bluez
 sudo apt-get install libbluetooth-dev
-````
-
 sudo python3 setup.py install
-
 wget https://github.com/pybluez/pybluez/archive/master.tar.gz
 tar xvf master.tar.gz
 cd pybluez=master
 sudo apt-get install libbluetooth-dev
-
 sudo apt-get install libglib2.0-dev
-
 sudo pip install bluepy
-
 sudo python3 setup.py install
+````
+
 ### Verify that Bluetooth is Working for LE
 
 ```` bash
@@ -292,9 +288,42 @@ sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
    xclip xsel libjpeg-dev libgpiod2
 ````
 
-9. Set up a virtual environment and install required python packages
+### Set up a virtual environment and install required python packages
+We use virtual environments is to keep dependencies required by different projects separated.
+
 ```` bash
 python3 -m venv .env
 source .env/bin/activate
 pip3 install -r requirements.txt
 ````
+
+### SECRETS!!! - Azure Connectivity and Protecting Your Secrets
+Azure IoT Central is what we using for capturing Telemetry and Managing out Gateway and Devices. It is a powerful SaaS offering and we will be using the tools and visualizations to build out a rich application for our scenario. In order to connect our devices and gateway to IoT Central, we need to manage a set of secrets and we will store those secrets in Azure Key Vault. I highly recommend that you do this so you do not make a mistake and expose access to your application, gateway or devices.
+
+I am going to assume the following when we work with Azure and Azure Portal...
+
+* That you already have an Azure Account (If you don't, get started here [LINK: Create your Azure free account today](https://azure.microsoft.com/en-us/free/))
+* That you have sufficient permissions in your Azure account to create Resource Groups and Resources
+* That you are familiar creating and using resources with the Azure CLI or the Azure Portal [LINK: Azure Portal](https://portal.azure.com/))
+
+
+Create our Connection Secrets...
+
+| Name | Secret (IoT Central Admin [Device Connection] Page)  | Content Type |
+|---|---|---|
+| raspberry-pi-protocol-translation-gateway-scopeid | Admin, Device Connection, Copy [ID scope] | Client Secret |
+| raspberry-pi-protocol-translation-gateway-saskey-device-primary | Admin, Device Connection, Devices, View Keys, Copy [Primary Key] | Client Secret |
+| raspberry-pi-protocol-translation-gateway-saskey-device-secondary | Admin, Device Connection, Devices, View Keys, Copy [Secondary Key] | Client Secret |
+| raspberry-pi-protocol-translation-gateway-saskey-gateway-primary | Admin, Device Connection, Azure Edge devices, View Keys, Copy [Primary Key] | Client Secret |
+| raspberry-pi-protocol-translation-gateway-saskey-gateway-secondary | Admin, Device Connection, Azure Edge devices, View Keys, Copy [Secondary Key] | Client Secret |
+
+
+
+
+
+
+
+Once these are all created in Key Vault, your list should look like this...
+![alt text](./Assets/azure-portal-key-vault-secrets-list.png "Azure Portal Key Vault Secrets List") 
+
+https://docs.microsoft.com/en-us/azure/key-vault/certificates/quick-create-python

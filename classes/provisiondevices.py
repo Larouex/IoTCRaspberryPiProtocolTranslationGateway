@@ -1,9 +1,10 @@
 # ==================================================================================
-#   File:   scanner.py
+#   File:   provisiondevices.py
 #   Author: Larry W Jordan Jr (larouex@gmail.com)
-#   Use:    Builds up the deives used in our mesh network
+#   Use:    Provisions Devices and updates cache file and do device provisioning 
+#           via DPS for IoT Central
 #
-#   Online:   www.hackinmakin.com
+#   Online: www.hackinmakin.com
 #
 #   (c) 2020 Larouex Software Design LLC
 #   This code is licensed under MIT license (see LICENSE.txt for details)    
@@ -37,6 +38,9 @@ class ProvisionDevices():
     
     def discover_and_provision_devices(self):
 
+        # Write flag
+        new_devices_discovered = False
+
         # Load the Devices Cache File for any devices
         # that have already been provisioned
         devicescache = DevicesCache(self.logger)
@@ -57,33 +61,22 @@ class ProvisionDevices():
           if [x for x in self.data["Devices"] if x.get("Address")==device.addr]:
             print("[ALREADY PROVISIONED, SKIPPING] %s" % devicename)
           else:
-            print(devicename)
             if devicename.startswith(self.data["DeviceNamePrefix"]):
+              new_devices_discovered = True
               print("[FOUND NEW DEVICE, PROVISIONING] %s" % (devicename))
               newDevice = {
                   "DeviceName": devicename, 
                   "Address": str(device.addr), 
-                  "LastRSSI": str(device.rssi)
+                  "LastRSSI": "%s dB" % str(device.rssi)
                 } 
               self.data["Devices"].append(newDevice)
             else:
-              print("NOT")
+              #print("NOT")
+              pass
         
-        devicescache.update_file(self.data)
+        if new_devices_discovered:
+          devicescache.update_file(self.data)
         
-        print(self.data)
+        #print(self.data)
 
-        #[devices["Devices"][0] for device in devices]
-        #print(DeviceExists(devicescache, "6A:6A:6A:6A:6A:6A"))
-
-
-        #for dev in devices:
-            #print("Device %s (%s), RSSI=%d dB" % (dev.addr, dev.addrType, dev.rssi))
-            #for (adtype, desc, value) in dev.getScanData():
-             #   print("  %s = %s" % (desc, value))
-
-            #if new_dev:
-             #   pass
-            #if new_dat:
-             #   pass
         pass
