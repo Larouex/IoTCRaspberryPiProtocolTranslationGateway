@@ -9,12 +9,19 @@
       "Name": "33-",
       "DCM": "urn:larouexiot:nanoble33:1"
     }
-  ], 
+  ],
   "Devices": [
     {
       "DeviceName": "Simulated Device",
       "Address": "6A:6A:6A:6A:6A:6A",
-      "LastRSSI": "91 dB"
+      "LastRSSI": "91 dB",
+      "DCM": "urn:larouexiot:nanoble33:1"
+    },
+    {
+      "DeviceName": "larouex-ble-sense-0001",
+      "Address": "c7:94:90:1c:8f:3c",
+      "LastRSSI": "-72 dB",
+      "DCM": "urn:larouexiot:nanoble33sense:1"
     }
   ]
 }

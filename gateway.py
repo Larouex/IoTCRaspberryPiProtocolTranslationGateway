@@ -31,16 +31,17 @@ from protocoltranslation.nanoble33sense import onAccelerometerNotification
 peripheral = None
 timer = None
 
+
 # -------------------------------------------------------------------------------
 #   Provision Devices, must be run using SUDO
 # -------------------------------------------------------------------------------
-def provision_devices():
+async def provision_devices():
   if not 'SUDO_UID' in os.environ.keys():
     print("[ERROR][STOPPED] Provisioning Devices requires Super User Priveleges")
     sys.exit(1)
 
   provisiondevices = ProvisionDevices()
-  provisiondevices.discover_and_provision_devices()
+  await provisiondevices.discover_and_provision_devices()
   return True
 
 def gather():
@@ -113,7 +114,7 @@ class ScanDelegate(DefaultDelegate):
             print("Received new data from", dev.addr)
 
 
-def main(argv):
+async def main(argv):
 
     short_options = "hvp"
     long_options = ["help", "verify", "provisiondevices"]
@@ -130,12 +131,10 @@ def main(argv):
         
         if current_argument in ("-p", "--provisiondevices"):
             print ("Provision Devices mode...")
-            provision_devices()
+            await provision_devices()
 
 
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:])
-    #timer = threading.Timer(15.0, gather)
-    #timer.start()
+    asyncio.run(main(sys.argv[1:]))

@@ -10,7 +10,7 @@
 #   (c) 2020 Larouex Software Design LLC
 #   This code is licensed under MIT license (see LICENSE.txt for details)    
 # ==================================================================================
-import time, logging, string, json, os, binascii, struct, threading
+import time, logging, string, json, os, binascii, struct, threading, asyncio
 from bluepy.btle import Scanner, DefaultDelegate, Peripheral
 from classes.getdevicecapabilitymodel import GetDeviceCapabilityModel
 from classes.devicescache import DevicesCache
@@ -22,6 +22,9 @@ from azure.keyvault.secrets import SecretClient
 from azure.keyvault.keys import KeyClient
 from azure.identity import ClientSecretCredential
 from classes.symmetrickey import SymmetricKey
+
+# uses the Azure IoT Device SDK for Python (Native Python libraries)
+from azure.iot.device.aio import ProvisioningDeviceClient
 
 # -------------------------------------------------------------------------------
 #   Delegate Class to Handle Discovered Devices
@@ -51,27 +54,8 @@ class ProvisionDevices():
         self.data = []
         self.new_devices = []
         self.characteristics = []
-    
-    def get_device_dcm(self, uuid, peripheral):
-
-        timer = None
-        global dcm_value
-
-        # now let's query the Device for it's assigned IoT Central DCM
-        # (Device Capability Model) and this will assign the device to the proper
-        # template for telemetry, properties, views etc.
-        dcm = peripheral.getCharacteristics(uuid=uuid)[0]
-        print("[DCM] %s" % dcm)
-        if (dcm.supportsRead()):
-            print("Supports: {supports}".format(supports = dcm.propertiesToString()))
-            val = binascii.b2a_hex(dcm.read())
-            val = binascii.unhexlify(val)
-            dcm_value = struct.unpack('s', val)[0]
-            print("[DCM FROM DEVICE] %s" % dcm_value)
-        timer_ran = True
-        return 
-
-    def discover_and_provision_devices(self):
+  
+    async def discover_and_provision_devices(self):
 
         # Write flag
         new_devices_discovered = False
@@ -98,12 +82,21 @@ class ProvisionDevices():
           else:
             if devicename.startswith(self.data["DeviceNamePrefix"]):
               new_devices_discovered = True
-              print("[FOUND NEW DEVICE] %s" % (devicename))
+              print("[FOUND NEW DEVICE] %s" % devicename)
+              
+              # Associate the IoTC Device Template
+              dcm_for_device = None
+              for deviceCapabilityModel in self.data["DeviceCapabilityModels"]:
+                print("[DEVICE PREFEIX] %s" % self.data["DeviceNamePrefix"] + deviceCapabilityModel["Name"])
+                if devicename.startswith(self.data["DeviceNamePrefix"] + deviceCapabilityModel["Name"]):
+                  dcm_for_device = deviceCapabilityModel["DCM"]
+                  print("[DEVICE DCM] %s" % dcm_for_device)
               
               newDevice = {
                   "DeviceName": devicename, 
                   "Address": str(device.addr), 
-                  "LastRSSI": "%s dB" % str(device.rssi)
+                  "LastRSSI": "%s dB" % str(device.rssi),
+                  "DCM": dcm_for_device
                 } 
               
               # Merge the Data with the New Devices, this is the
@@ -157,21 +150,24 @@ class ProvisionDevices():
             for device in self.new_devices: 
               # Get the Device Name
               device_name = device["DeviceName"]
-              print("[PROVISIONING] %s" % device_name)
               
               # Get a Device Specific Symetric Key
               device_symmetrickey = symmetrickey.compute_derived_symmetric_key(device["DeviceName"], device_secondary_key.value)
               print("[SYMETRIC KEY] %s" % device_symmetrickey)
 
-              # Pluck the details on the DCM characteristic
-              dcm_characteristic = [x for x in self.characteristics["Characteristics"] if x.get("Name")=="DCM_CHARACTERISTIC"]
-              print("[DCM_CHARACTERISTIC] %s" % dcm_characteristic[0])
-              print("[DCM_CHARACTERISTIC UUID] %s" % dcm_characteristic[0]["UUID"])
+              print("[PROVISIONING] %s" % device_name)
 
-              get_dcm = GetDeviceCapabilityModel()
-              dcm_value = get_dcm.get_device_dcm(device["Address"], dcm_characteristic[0]["UUID"])
+              # Provision the Device
+              provisioning_device_client = ProvisioningDeviceClient.create_from_symmetric_key(
+                provisioning_host=secrets.data["ProvisioningHost"],
+                registration_id=device["DeviceName"],
+                id_scope=scope_id.value,
+                symmetric_key=device_symmetrickey,
+                websockets=True
+              )
 
-              print("[DCM] %s" % dcm_value)
+              provisioning_device_client.provisioning_payload = '{"iotcModelId":"%s"}' % (device["DCM"])
+              registration_result = await provisioning_device_client.register()
       
             # Update the Cache
             devicescache.update_file(self.data)

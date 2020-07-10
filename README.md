@@ -477,6 +477,12 @@ az ad sp create-for-rbac --name http://raspberry-pi-protocol-translation-gateway
 }
 ````
 
+az keyvault set-policy --name larouex-prod-key-vault --spn "9afd63c4-91e2-4054-b068-aeb21dc291eb" --secret-permissions get set list delete backup recover restore purge
+
+````bash
+az keyvault set-policy --name <your key vault url> --spn <your password> --secret-permissions get set list delete backup recover restore purge
+````
+
 ### Set up the Credentials in the Raspberry Pi
 Let's go back to a terminal window and setup the variables on the Raspberry Pi. Use the values from the generated Jasn to set AZURE_CLIENT_ID ("appId"), AZURE_CLIENT_SECRET ("password") and AZURE_TENANT_ID ("tenant") environment variables. 
 
@@ -484,7 +490,11 @@ Let's go back to a terminal window and setup the variables on the Raspberry Pi. 
 export AZURE_CLIENT_ID="<your appId>"
 export AZURE_CLIENT_SECRET="<your password>"
 export AZURE_TENANT_ID="<your tenant>"
+export AZURE_SUBSCRIPTION_ID="<your tenant>"
 ````
 
+Authorize the service principal to perform key operations in your Key Vault:
+
+https://www.bluetooth.com/specifications/assigned-numbers/generic-access-profile/
 
 
