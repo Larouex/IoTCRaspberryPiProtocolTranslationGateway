@@ -1,15 +1,20 @@
 {
   "DeviceNamePrefix": "larouex-ble-",
+  "DeviceCapabilityModels": [
+    {
+      "Name": "sense-",
+      "DCM": "urn:larouexiot:nanoble33sense:1"
+    },
+    {
+      "Name": "33-",
+      "DCM": "urn:larouexiot:nanoble33:1"
+    }
+  ], 
   "Devices": [
     {
       "DeviceName": "Simulated Device",
       "Address": "6A:6A:6A:6A:6A:6A",
       "LastRSSI": "91 dB"
-    },
-    {
-      "DeviceName": "larouex-ble-0001",
-      "Address": "c7:94:90:1c:8f:3c",
-      "LastRSSI": "-71 dB"
     }
   ]
 }

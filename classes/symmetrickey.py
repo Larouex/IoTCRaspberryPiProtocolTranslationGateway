@@ -28,5 +28,5 @@ class SymmetricKey():
             device_key_encoded = base64.b64encode(signed_hmac.digest())
             return device_key_encoded.decode("utf-8")
         except Exception as ex:
-            self.logger.warning("Failed to join LORA network: %s", ex)
+            self.logger.warning("Failed to Generate Device Key: %s", ex)
 

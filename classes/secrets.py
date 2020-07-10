@@ -8,6 +8,8 @@
 #   (c) 2020 Larouex Software Design LLC
 #   This code is licensed under MIT license (see LICENSE.txt for details)    
 # ==================================================================================
+import json
+import logging
 
 class Secrets():
 

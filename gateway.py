@@ -25,7 +25,7 @@ from classes.provisiondevices import ProvisionDevices
 from classes.config import Config
 from classes.dpscache import DpsCache
 from classes.symmetrickey import SymmetricKey
-from classes.nanoblesenseservices import NanoBLESenseServices
+from classes.nanobleservices import NanoBLEServices
 from protocoltranslation.nanoble33sense import onAccelerometerNotification
 
 peripheral = None

@@ -13,4 +13,6 @@ asyncio
 azure.iot.device
 azure.identity
 azure.keyvault.certificates
+azure.keyvault.secrets
+azure.keyvault.keys
 bluepy

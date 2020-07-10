@@ -1,0 +1,188 @@
+{
+  "@id": "urn:larouexiot:nanoble33sense:1",
+  "@type": "CapabilityModel",
+  "displayName": "Arduino Nano BLE 33 Sense for IoT to Central",
+  "description": "Arduino Nano BLE 33 Sense for IoT to Central - Full Sensor Template - July 2020",
+  "@context": [
+    "http://azureiot.com/v1/contexts/IoTModel.json"
+  ],
+  "implements": [ 
+    {
+      "@type": "InterfaceInstance",
+      "name": "DeviceInformationInterface",
+      "schema": {
+        "@id": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+        "@type": "Interface",
+        "displayName": {
+          "en": "Device Information"
+        },
+        "contents": [
+          {
+            "@type": "Property",
+            "description": {
+              "en": "Company name of the device manufacturer. This could be the same as the name of the original equipment manufacturer (OEM). Ex. Contoso."
+            },
+            "displayName": {
+              "en": "Manufacturer"
+            },
+            "name": "manufacturer",
+            "schema": "string"
+          },
+          {
+            "@type": "Property",
+            "description": {
+              "en": "Device model name or ID. Ex. Surface Book 2."
+            },
+            "displayName": {
+              "en": "Device model"
+            },
+            "name": "model",
+            "schema": "string"
+          },
+          {
+            "@type": "Property",
+            "description": {
+              "en": "Version of the software on your device. This could be the version of your firmware. Ex. 1.3.45"
+            },
+            "displayName": {
+              "en": "Software version"
+            },
+            "name": "swVersion",
+            "schema": "string"
+          },
+          {
+            "@type": "Property",
+            "description": {
+              "en": "Name of the operating system on the device. Ex. Windows 10 IoT Core."
+            },
+            "displayName": {
+              "en": "Operating system name"
+            },
+            "name": "osName",
+            "schema": "string"
+          },
+          {
+            "@type": "Property",
+            "description": {
+              "en": "Architecture of the processor on the device. Ex. x64 or ARM."
+            },
+            "displayName": {
+              "en": "Processor architecture"
+            },
+            "name": "processorArchitecture",
+            "schema": "string"
+          },
+          {
+            "@type": "Property",
+            "description": {
+              "en": "Name of the manufacturer of the processor on the device. Ex. Intel."
+            },
+            "displayName": {
+              "en": "Processor manufacturer"
+            },
+            "name": "processorManufacturer",
+            "schema": "string"
+          },
+          {
+            "@type": "Property",
+            "description": {
+              "en": "Total available storage on the device in kilobytes. Ex. 2048000 kilobytes."
+            },
+            "displayName": {
+              "en": "Total storage"
+            },
+            "name": "totalStorage",
+            "displayUnit": {
+              "en": "kilobytes"
+            },
+            "schema": "long"
+          },
+          {
+            "@type": "Property",
+            "description": {
+              "en": "Total available memory on the device in kilobytes. Ex. 256000 kilobytes."
+            },
+            "displayName": {
+              "en": "Total memory"
+            },
+            "name": "totalMemory",
+            "displayUnit": {
+              "en": "kilobytes"
+            },
+            "schema": "long"
+          }
+        ]
+      }
+    },
+    {
+      "@type": "InterfaceInstance",
+      "name": "ArduinoNanoBLE33Interface",
+      "schema": {
+        "@id": "urn:larouexiot:nanoble33sense:ArduinoNanoBLE33Interface:1",
+        "@type": "Interface",
+        "displayName": "Telemetry and Property Interface for Nano BLE 33 Sense Device",
+        "contents": [
+          {
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Battery Level"
+            },
+            "name": "uuid_2001",
+            "displayUnit": {
+              "en": "Percentage"
+            },
+            "schema": "integer",
+            "unit": "Units/Humidity/percent"
+          },
+          {
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "Accelerometer"
+            },
+            "name": "uuid_4001",
+            "schema": {
+              "@type": "Object",
+              "displayName": {
+                "en": "Object"
+              },
+              "fields": [
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "x"
+                  },
+                  "name": "x",
+                  "schema": "double"
+                },
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "y"
+                  },
+                  "name": "y",
+                  "schema": "double"
+                },
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "z"
+                  },
+                  "name": "z",
+                  "schema": "double"
+                }
+              ]
+            }
+          },
+          {
+            "@type": "Telemetry",
+            "displayName": {
+              "en": "RSSI"
+            },
+            "name": "rssi",
+            "schema": "integer"
+          }
+        ]      
+      }
+    }
+  ]
+}

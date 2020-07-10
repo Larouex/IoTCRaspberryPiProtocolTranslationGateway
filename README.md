@@ -420,6 +420,9 @@ The fist thing we will do is copy the "secrets_template.json" to a new file name
   }
 }
 ````
+Save the file and you can ignore the "LocalSecrets" section.
+
+<b>IMPORTANT: Make sure to check your .gitignore to verify that "secrets.json" is in the list so it does not get checked in! The file should be dithered in your Visual Studio Code Explorer window.</b>
 
 ### I don't want to use Key Vault!
 If you are working locally and do not want to implement the security and awesomeness of Key Vault, then go ahead and set "UseKeyVault" to false. Copy all our your SaS key values from the Admin, Device Connection page in IoT Central...
@@ -443,7 +446,7 @@ If you are working locally and do not want to implement the security and awesome
     }
 
 ````
-Save the file and you can ignore the Key Vault section.
+Save the file and you can ignore the "KeyVaultSecrets" section.
 
 <b>IMPORTANT: Make sure to check your .gitignore to verify that "secrets.json" is in the list so it does not get checked in! The file should be dithered in your Visual Studio Code Explorer window.</b>
 
@@ -464,7 +467,24 @@ az login
 az ad sp create-for-rbac --name http://raspberry-pi-protocol-translation-gateway --skip-assignment
 ````
 
+````json
+{
+  "appId": "<your appID>",
+  "displayName": "raspberry-pi-protocol-translation-gateway",
+  "name": "http://raspberry-pi-protocol-translation-gateway",
+  "password": "<your password>",
+  "tenant": "<your tenant>"
+}
+````
 
+### Set up the Credentials in the Raspberry Pi
+Let's go back to a terminal window and setup the variables on the Raspberry Pi. Use the values from the generated Jasn to set AZURE_CLIENT_ID ("appId"), AZURE_CLIENT_SECRET ("password") and AZURE_TENANT_ID ("tenant") environment variables. 
+
+````bash
+export AZURE_CLIENT_ID="<your appId>"
+export AZURE_CLIENT_SECRET="<your password>"
+export AZURE_TENANT_ID="<your tenant>"
+````
 
 
 
