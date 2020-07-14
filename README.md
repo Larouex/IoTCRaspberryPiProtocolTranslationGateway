@@ -101,10 +101,10 @@ Click the link below and install on your Desktop environment.
 [LINK: Install the Azure CLI Tooling](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest)
 
 
-## Setting up the Development Environment on the Raspberry Pi
+# Setting up the Development Environment on the Raspberry Pi
 We will need to setup our Raspberry Pi with all of the capabilities we will need to develop for our Protcol Translation Gateway.
 
-#### Connecting to the Raspberry Pi using SSH
+## Connecting to the Raspberry Pi using SSH
 We will be connecting to the Raspberry Pi using the remote SSH capability of Visual Studio Code that we installed as part of our development toolchain. When you set the RPi up, we enabled the device to connect to our Wifi network. 
 
 Now we want to find the IP address of our RPi and connect to via VS Code's Remote SSH tools. This will let us develop our code and test our application working remotely connected to the device.
@@ -115,7 +115,7 @@ Now we want to find the IP address of our RPi and connect to via VS Code's Remot
 * Here is how we will connect to the Raspberry Pi...
 [LINK: Remote development over SSH](https://code.visualstudio.com/remote-tutorials/ssh/getting-started)
 
-#### Connect to the Raspberry Pi
+## Connect to the Raspberry Pi
 
 * Click on the green icon in the bottom left of Visual Studio Code, select "Remote-SSH:Connect to Host..."
 * Enter in the connection IP. It will be "pi@your IP Address". For example "pi@192.186.1.174"
@@ -128,14 +128,14 @@ Now we want to find the IP address of our RPi and connect to via VS Code's Remot
 * Click on left side of the main screen "Open Folder" and the navigation helper will open and default to "/home/pi/" press enter as that is right where we want to go!
   * You maybe prompted re-enter your password (which is no longer raspberry, right?)
 
-#### Create our Project Folder on the Raspberry Pi
+## Create our Project Folder on the Raspberry Pi
 
 * Click on "New Folder" icon
 * Type in "Projects" and press enter to create the folder
 
   ![alt text](./Assets/vs-code-connect-remote-ssh-pi-create-project-folder.png "Pi SSH Connect Create Project Folder") 
 
-#### Update Python on the Raspberry Pi
+## Update Python on the Raspberry Pi
 
 From the terminal, run these two commands to bring your Python environments to the latest versions...
 
@@ -144,9 +144,10 @@ sudo apt-get install python3
 sudo apt-get install python
 ````
 
-#### Build our Bluetooth Stack
+## Build our Bluetooth Stack
+BlueZ is official Linux Bluetooth protocol stack.
 
-We will be using the lastest version of BlueZ
+We will be using the latest version of BlueZ. As of the last update to this repository, it was version 5.54. You should work with the latest, stable release in future as experimental features like BLE will stabilize and improve.
 
 Visit the bluez download page and copy the link to the latest source release (under the User Space BlueZ Package section)
 
@@ -154,6 +155,33 @@ Latest version (5.54) since this documentation was updated. Bet sure to get the 
 http://www.bluez.org/
 
 
+### Install Dependencies for BlueZ
+````bash
+sudo apt-get install -y git bc libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev
+libreadline-dev autoconf
+````
+### Install json-c
+````bash
+cd ~
+wget https://s3.amazonaws.com/json-c_releases/releases/json-c-0.13.tar.gz
+tar -xvf json-c-0.13.tar.gz
+cd json-c-0.13/
+./configure --prefix=/usr --disable-static && make
+sudo make install
+````
+
+### Install ell for BlueZ
+````bash
+cd ~
+wget https://mirrors.edge.kernel.org/pub/linux/libs/ell/ell-0.6.tar.xz
+tar -xvf ell-0.6.tar.xz
+cd ell-0.6/
+sudo ./configure --prefix=/usr
+sudo make
+sudo make install
+````
+
+### Get BlueZ Source Code, Compile/Build and Install
 ```` bash
 cd ~
 wget http://www.kernel.org/pub/linux/bluetooth/bluez-5.54.tar.xz
@@ -161,8 +189,9 @@ tar xvf bluez-5.54.tar.xz
 cd bluez-5.54
 sudo apt-get update
 sudo apt-get install -y libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
-./configure --enable-library
+./configure --enable-library --enable-mesh --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc --localstatedir=/var
 make
+sudo make install
 ````
 
 ```` bash
