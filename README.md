@@ -11,6 +11,11 @@ This project will enable a Raspberry Pi to act as a "Protocol Translation" Gatew
 
 ![Protocol Translation Gateway](./Assets/gateway-protocol-lrg.png)
 
+## Features
+This project is primarly a training and education project that is fully realized. You can take the componants and build out a working IoT system end to end.
+
+* Automated Regisration and Provisioing of Nano BLE Devices
+
 You may want to try the supporting projects for the Nano BLE Devices if you landed here out of sequence.
 
 ## Arduino Nano BLE 33 for Azure IoT Central
@@ -497,4 +502,34 @@ Authorize the service principal to perform key operations in your Key Vault:
 
 https://www.bluetooth.com/specifications/assigned-numbers/generic-access-profile/
 
+## Provisioning BLE Devices
 
+````json
+{
+  "DeviceNamePrefix": "larouex-ble-",
+  "DeviceCapabilityModels": [
+    {
+      "Name": "sense-",
+      "DCM": "urn:larouexiot:nanoble33sense:1"
+    },
+    {
+      "Name": "33-",
+      "DCM": "urn:larouexiot:nanoble33:1"
+    }
+  ],
+  "Devices": [
+    {
+      "DeviceName": "Simulated Device",
+      "Address": "6A:6A:6A:6A:6A:6A",
+      "LastRSSI": "-91 dB",
+      "DCM": "urn:larouexiot:nanoble33:1"
+    },
+    {
+      "DeviceName": "larouex-ble-sense-0001",
+      "Address": "c7:94:90:1c:8f:3c",
+      "LastRSSI": "0 dB",
+      "DCM": "urn:larouexiot:nanoble33sense:1"
+    }
+  ]
+}
+````

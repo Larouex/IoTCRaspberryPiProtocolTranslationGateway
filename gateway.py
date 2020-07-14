@@ -8,8 +8,10 @@
 #   (c) 2020 Larouex Software Design LLC
 #   This code is licensed under MIT license (see LICENSE.txt for details)    
 # ==================================================================================
-import  logging, bluetooth, hmac, getopt, sys, time, binascii, \
+import  bluetooth, hmac, getopt, sys, time, binascii, \
         struct, string, threading, asyncio, os
+
+import logging as Log
 
 # bluepy - Bluetooth LE interface for Python
 from bluepy.btle import Scanner, DefaultDelegate
@@ -116,8 +118,12 @@ class ScanDelegate(DefaultDelegate):
 
 async def main(argv):
 
-    short_options = "hvp"
-    long_options = ["help", "verify", "provisiondevices"]
+    # execution state from args
+    is_provisiondevices = False
+    is_resethci = False
+
+    short_options = "hvpr"
+    long_options = ["help", "verbose", "provisiondevices", "resethci"]
     full_cmd_arguments = sys.argv
     argument_list = full_cmd_arguments[1:]
     try:
@@ -125,16 +131,29 @@ async def main(argv):
     except getopt.error as err:
         print (str(err))
         #sys.exit(2)
+    
+    
+
     for current_argument, current_value in arguments:
-        if current_argument in ("-v", "--verify"):
-            print ("Verification mode...")
+        if current_argument in ("-v", "--verbose"):
+            Log.basicConfig(format="%(levelname)s: %(message)s", level=Log.DEBUG)
+            Log.info("Verbose mode...")
+        else:
+            Log.basicConfig(format="%(levelname)s: %(message)s")
         
         if current_argument in ("-p", "--provisiondevices"):
-            print ("Provision Devices mode...")
-            await provision_devices()
+            Log.info("Provision Devices mode...")
+            is_provisiondevices = True
 
+        if current_argument in ("-r", "--resethci"):
+            Log.info("Bluetooth Reset Interface mode...")
+            is_resethci = True
 
+    if (is_provisiondevices):
+        provision_devices = ProvisionDevices(Log=Log)
+        await provision_devices.discover_and_provision_devices(resethci=is_resethci)
 
 
 if __name__ == "__main__":
     asyncio.run(main(sys.argv[1:]))
+

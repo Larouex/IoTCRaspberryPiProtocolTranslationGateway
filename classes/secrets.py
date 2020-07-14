@@ -13,8 +13,8 @@ import logging
 
 class Secrets():
 
-    def __init__(self, logger):
-        self.logger = logger
+    def __init__(self, Log):
+        self.logger = Log
         self.load_file()
 
     def load_file(self):
@@ -22,7 +22,6 @@ class Secrets():
             self.data = json.load(config_file)
             alerts = self.load_alerts()
             self.logger.info(alerts["Alerts"]["Secrets"]["Loaded"].format(self.data))
-            print(alerts["Alerts"]["Secrets"]["Loaded"].format(self.data))
 
     def load_alerts(self):
         with open('alerts.json', 'r') as alerts_file:

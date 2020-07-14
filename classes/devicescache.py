@@ -13,8 +13,8 @@ import logging
 
 class DevicesCache():
 
-    def __init__(self, logger):
-        self.logger = logger
+    def __init__(self, Log):
+        self.logger = Log
         self.load_file()
 
     def load_file(self):
@@ -22,13 +22,11 @@ class DevicesCache():
             self.data = json.load(config_file)
             alerts = self.load_alerts()
             self.logger.info(alerts["Alerts"]["DevicesCache"]["Loaded"].format(self.data))
-            print(alerts["Alerts"]["DevicesCache"]["Loaded"].format(self.data))
 
     def update_file(self, data):
         with open('devicescache.json', 'w') as configs_file:
             alerts = self.load_alerts() 
             self.logger.info(alerts["Alerts"]["DevicesCache"]["Updated"].format(self.data))
-            print(alerts["Alerts"]["DevicesCache"]["Updated"].format(self.data))
             configs_file.write(json.dumps(data, indent=2))
 
     def load_alerts(self):
