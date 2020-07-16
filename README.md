@@ -242,7 +242,7 @@ Set to run automatically...
 sudo systemctl enable bluetooth
 ````
 
-##### Enable Bluetooth Low Energy Features
+## Enable Bluetooth Low Energy Features
 One final configuration change you can make is to enable the bluetooth low energy features in bluez.  These are special APIs that allow bluez to interact with bluetooth low energy devices, however they're still in development and put behind an experimental flag that must be enabled first.
 
 To enable bluez's experimental features like BLE you can modify the bluez service configuration.  Edit this configuration by running:
@@ -274,7 +274,6 @@ systemctl status bluetooth
 ````
 
 ![Raspberry Pi Terminal Bluetooth Status Experimental](./Assets/pi-terminal-bluetooth-status_experimental.png)
-
 
 
 ### Verify that Bluetooth is Working for LE
