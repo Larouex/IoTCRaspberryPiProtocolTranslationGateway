@@ -265,42 +265,17 @@ Now tell systemd to reload its configuration files by running:
 ```` bash
 sudo systemctl daemon-reload
 sudo systemctl restart bluetooth
-systemctl status bluetooth
 ````
 
 Once the bluez service is running you can check the experimental features are enabled by running the status command again.  You should see output similar to the following (notice the --experimental on the last line):
 
 ```` bash
- Download: fileCopy Code
-● bluetooth.service - Bluetooth service
-   Loaded: loaded (/lib/systemd/system/bluetooth.service; disabled)
-   Active: active (running) since Mon 2016-02-29 05:15:55 UTC; 4s ago
-     Docs: man:bluetoothd(8)
- Main PID: 1022 (bluetoothd)
-   Status: "Running"
-   CGroup: /system.slice/bluetooth.service
-           └─1022 /usr/local/libexec/bluetooth/bluetoothd --experimental
+systemctl status bluetooth
 ````
-### Install Libraries
 
-Install the libraries needed for the Raspberry Pi Gateway...
-````bash
-cd ~/Projects/IoTCRaspberryPiProtocolTranslationGateway/
-pip3 install -r requirements.txt
-````
-Setup all our Bluetooth Python Libraries for BlueZ
-````bash
-sudo apt-get install bluez python-bluez
-sudo apt-get install libbluetooth-dev
-sudo python3 setup.py install
-wget https://github.com/pybluez/pybluez/archive/master.tar.gz
-tar xvf master.tar.gz
-cd pybluez=master
-sudo apt-get install libbluetooth-dev
-sudo apt-get install libglib2.0-dev
-sudo pip install bluepy
-sudo python3 setup.py install
-````
+![Raspberry Pi Terminal Bluetooth Status Experimental](./Assets/pi-terminal-bluetooth-status_experimental.png)
+
+
 
 ### Verify that Bluetooth is Working for LE
 
@@ -330,6 +305,29 @@ sudo hciconfig hci0 up
 
 ### Getting Started with Bluetooth and Gateway Coding
 Now that we have everything ready to go on our desktop and Raspberry Pi, let's get started!
+
+### Install Libraries
+
+Install the libraries needed for the Raspberry Pi Gateway...
+````bash
+cd ~/Projects/IoTCRaspberryPiProtocolTranslationGateway/
+pip3 install -r requirements.txt
+````
+Setup all our Bluetooth Python Libraries for BlueZ
+````bash
+sudo apt-get install bluez python-bluez
+sudo apt-get install libbluetooth-dev
+sudo python3 setup.py install
+wget https://github.com/pybluez/pybluez/archive/master.tar.gz
+tar xvf master.tar.gz
+cd pybluez=master
+sudo apt-get install libbluetooth-dev
+sudo apt-get install libglib2.0-dev
+sudo pip install bluepy
+sudo python3 setup.py install
+````
+
+
 
 First off let's clone this repository to our Raspberry Pi...
 ```` bash
