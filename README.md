@@ -203,6 +203,9 @@ in /usr/libexec/bluetooth/bluetoothd, as shown in the screenshot below...
 ```` bash
 sudo vi /lib/systemd/system/bluetooth.service
 ````
+![Raspberry Pi Terminal Bluetooth ExecStart](./Assets/pi-terminal-bluetooth-execstart.png)
+
+You still need to create a symlink from the old bluetoothd to the new one. First, rename the old file for backup... 
 
 ```` bash
 sudo cp /usr/lib/bluetooth/bluetoothd /usr/lib/bluetooth/bluetoothd-543.orig
@@ -227,8 +230,7 @@ meshctl -v
 You should see this oputput...
 ![Raspberry Pi Terminal Bluetooth Version Check](./Assets/pi-terminal-bluetooth-version-check.png)
 
-After opening this file, bluetooth.service, make sure the ExecStart line points to your new daemon
-in /usr/libexec/bluetooth/bluetoothd, as shown in the screenshot below. 
+##### Start Bluetooth and Run Automatically
 
 ```` bash
 systemctl status bluetooth
@@ -251,26 +253,7 @@ sudo nano /lib/systemd/system/bluetooth.service
 
 Enable the experimental features by adding --experimental to the ExecStart line, for example the configuration should look like:
 
-```` bash
-[Unit]
-Description=Bluetooth service
-Documentation=man:bluetoothd(8)
-ConditionPathIsDirectory=/sys/class/bluetooth
- 
-[Service]
-Type=dbus
-BusName=org.bluez
-ExecStart=/usr/local/libexec/bluetooth/bluetoothd --experimental               
-NotifyAccess=main
-#WatchdogSec=10
-#Restart=on-failure
-CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_BIND_SERVICE
-LimitNPROC=1
- 
-[Install]
-WantedBy=bluetooth.target
-Alias=dbus-org.bluez.service
-````
+![Raspberry Pi Terminal Bluetooth Execstart Add Experimental](./Assets/pi-terminal-bluetooth-execstart-add-experimental.png)
 
 Save the file and exit the editor by pressing 
 * Ctrl-o
