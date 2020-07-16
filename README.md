@@ -296,22 +296,26 @@ You can the device is detected in the scan from the Raspberry Pi and we are up a
 
 ![alt text](./Assets/le-scan-terminal-window.png "le scan") 
 
-<b>NOTE:</b> If you get an error with LE Scan, try these commands...
+<b>NOTE:</b> If you get an error with LE Scan you can bring down the specific interface (i.e. hci0 = onboard bluetooth, hci1 = could a USB installed Bluetooth antennae, etc), try these commands...
 ```` bash
 sudo hciconfig hci0 down
 sudo hciconfig hci0 up
 ````
 
-### Getting Started with Bluetooth and Gateway Coding
+## Getting Started with Bluetooth and Gateway Coding
 Now that we have everything ready to go on our desktop and Raspberry Pi, let's get started!
 
 ### Install Libraries
 
-Install the libraries needed for the Raspberry Pi Gateway...
+Install this project "Raspberry Pi "Protocol Translation" Gateway for Azure IoT Central"...
 ````bash
-cd ~/Projects/IoTCRaspberryPiProtocolTranslationGateway/
-pip3 install -r requirements.txt
+cd ~
+cd /Projects
+git clone https://github.com/Larouex/IoTCRaspberryPiProtocolTranslationGateway.git
 ````
+
+
+pip3 install -r requirements.txt
 Setup all our Bluetooth Python Libraries for BlueZ
 ````bash
 sudo apt-get install bluez python-bluez
