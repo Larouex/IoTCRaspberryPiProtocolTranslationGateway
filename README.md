@@ -292,7 +292,7 @@ Next up I started monitoring one of my Nano BLE 33 Devices in Advertising mode a
 ```` bash
 sudo hcitool lescan
 ````
-You can the device is detected in the scan from the Raspberry Pi and we are up and working!
+The Nano BLE Sense device is detected in the scan from the Raspberry Pi and we are up and working!
 
 ![alt text](./Assets/le-scan-terminal-window.png "le scan") 
 
@@ -302,21 +302,12 @@ sudo hciconfig hci0 down
 sudo hciconfig hci0 up
 ````
 
-## Getting Started with Bluetooth and Gateway Coding
-Now that we have everything ready to go on our desktop and Raspberry Pi, let's get started!
+## Getting Started with our Gateway Coding
+Now that we have everything ready in our development tool chains and OS environments on our desktop and the Raspberry Pi, let's get started coding!
 
-### Install Libraries
+## Install the Project, Libraries and Dependancies
 
-Install this project "Raspberry Pi "Protocol Translation" Gateway for Azure IoT Central"...
-````bash
-cd ~
-cd /Projects
-git clone https://github.com/Larouex/IoTCRaspberryPiProtocolTranslationGateway.git
-````
-
-
-pip3 install -r requirements.txt
-Setup all our Bluetooth Python Libraries for BlueZ
+### Setup all our Bluetooth Python Libraries for BlueZ
 ````bash
 sudo apt-get install bluez python-bluez
 sudo apt-get install libbluetooth-dev
@@ -330,16 +321,7 @@ sudo pip install bluepy
 sudo python3 setup.py install
 ````
 
-
-
-First off let's clone this repository to our Raspberry Pi...
-```` bash
-cd ~
-cd Projects
-git clone https://github.com/Larouex/IoTCRaspberryPiProtocolTranslationGateway.git
-cd IoTCRaspberryPiProtocolTranslationGateway
-````
-##  Install required packages
+###  Install required packages
 ```` bash
 sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev \
    pkg-config libgl1-mesa-dev libgles2-mesa-dev \
@@ -349,16 +331,16 @@ sudo apt install libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
    xclip xsel libjpeg-dev libgpiod2
 ````
 
-### Set up a virtual environment and install required python packages
-We use virtual environments is to keep dependencies required by different projects separated.
-
-```` bash
-python3 -m venv .env
-source .env/bin/activate
+### Clone this project "Raspberry Pi "Protocol Translation" Gateway for Azure IoT Central"...
+````bash
+cd ~
+cd Projects
+git clone https://github.com/Larouex/IoTCRaspberryPiProtocolTranslationGateway.git
+cd IoTCRaspberryPiProtocolTranslationGateway
 pip3 install -r requirements.txt
 ````
 
-### SECRETS!!! - Azure Connectivity and Protecting Your Secrets
+## SECRETS!!! - Azure Connectivity and Protecting Your Secrets
 Azure IoT Central is what we using for capturing Telemetry and Managing out Gateway and Devices. It is a powerful SaaS offering and we will be using the tools and visualizations to build out a rich application for our scenario. In order to connect our devices and gateway to IoT Central, we need to manage a set of secrets and we will store those secrets in Azure Key Vault. I highly recommend that you do this so you do not make a mistake and expose access to your application, gateway or devices.
 
 I am going to assume the following when we work with Azure and Azure Portal...
