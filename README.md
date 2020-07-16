@@ -141,8 +141,9 @@ From the terminal, run these two commands to bring your Python environments to t
 
 ```` python
 sudo apt-get install python3
-sudo apt-get install python
+sudo apt-get install python3
 ````
+If it all comes back as up to date, then goodness!
 
 ## Build our Bluetooth Stack
 BlueZ is official Linux Bluetooth protocol stack.
@@ -158,7 +159,7 @@ http://www.bluez.org/
 ### Install Dependencies for BlueZ
 ````bash
 sudo apt-get install -y git bc libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev
-libreadline-dev autoconf
+sudo apt-get install -y libreadline-dev autoconf
 ````
 ### Install json-c
 ````bash
@@ -190,16 +191,51 @@ cd bluez-5.54
 sudo apt-get update
 sudo apt-get install -y libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev libical-dev libreadline-dev
 ./configure --enable-library --enable-mesh --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc --localstatedir=/var
-make
+sudo make
 sudo make install
 ````
+
+We now need to let the Rasp[berry Pi's Raspian OS know that we want to use our newly compiled BlueZ Bluetoothh stack and tell systemd to use the new bluetooth daemon:
+
+After opening this file, bluetooth.service, make sure the ExecStart line points to your new daemon
+in /usr/libexec/bluetooth/bluetoothd, as shown in the screenshot below...
+
+```` bash
+sudo vi /lib/systemd/system/bluetooth.service
+````
+
+```` bash
+sudo cp /usr/lib/bluetooth/bluetoothd /usr/lib/bluetooth/bluetoothd-543.orig
+cd /usr/lib/bluetooth/
+ls -l
+````
+
+You should see this oputput...
+![Raspberry Pi Terminal Bluetooth ls](./Assets/pi-terminal-bluetooth-ls.png)
+
+Create the symlink using the commands below...
+```` bash
+sudo ln -sf /usr/libexec/bluetooth/bluetoothd /usr/lib/bluetooth/bluetoothd
+sudo systemctl daemon-reload
+````
+
+Finally; Let's double check the version of bluetoothd and meshctl...
+```` bash
+bluetoothd -v
+meshctl -v
+````
+You should see this oputput...
+![Raspberry Pi Terminal Bluetooth Version Check](./Assets/pi-terminal-bluetooth-version-check.png)
+
+After opening this file, bluetooth.service, make sure the ExecStart line points to your new daemon
+in /usr/libexec/bluetooth/bluetoothd, as shown in the screenshot below. 
 
 ```` bash
 systemctl status bluetooth
 sudo systemctl start bluetooth
 ````
 
-Run automatically
+Set to run automatically...
 ```` bash
 sudo systemctl enable bluetooth
 ````
