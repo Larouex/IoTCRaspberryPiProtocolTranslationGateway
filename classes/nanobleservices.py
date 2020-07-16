@@ -23,7 +23,6 @@ class NanoBLEServices():
             self.data = json.load(config_file)
             alerts = self.load_alerts()
             self.logger.info(alerts["Alerts"]["NanoBLEServices"]["Loaded"].format(self.data))
-            print(alerts["Alerts"]["NanoBLEServices"]["Loaded"].format(self.data))
 
     def load_alerts(self):
         with open('alerts.json', 'r') as alerts_file:

@@ -28,15 +28,10 @@
 #   (c) 2020 Larouex Software Design LLC
 #   This code is licensed under MIT license (see LICENSE.txt for details)    
 # ==================================================================================
-import logging
-import bluetooth
-import hmac
-import getopt
-import sys
-import time
-import binascii
-import struct
-import string
+import  bluetooth, hmac, sys, time, binascii, \
+        struct, string, threading, asyncio, os
+
+import logging as Log
 
 # bluepy - Bluetooth LE interface for Python
 from bluepy import btle
@@ -47,198 +42,32 @@ class NanoBLE33SENSE():
         self.logger = logger
         self.data = []
 
-# -----------------------------------------------------------------------------------
-# Delegate: onTelemetryFrequencyCharacteristicWrite
-# -----------------------------------------------------------------------------------
-class onTelemetryFrequencyCharacteristicWrite(btle.DefaultDelegate):
+    # -----------------------------------------------------------------------------------
+    # Function: ReadTemperature
+    # -----------------------------------------------------------------------------------
+    def ReadTemperature():
 
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
+        t = peripheral.getCharacteristics(uuid="1101")[0]
+        if (t.supportsRead()):
+            self.logger.info("Supports: {supports}".format(supports = t.propertiesToString()))
+            val = binascii.b2a_hex(t.read())
+            val = binascii.unhexlify(val)
+            val = struct.unpack('f', val)[0]
+            self.logger.info("Temperature: {temp:.2f}".format(temp = val))
+        
         pass
 
-# -----------------------------------------------------------------------------------
-# Delegate: onAccelerometerNotification
-# -----------------------------------------------------------------------------------
-class onAccelerometerNotification(btle.DefaultDelegate):
+    # -----------------------------------------------------------------------------------
+    # Function: ReadHumidity
+    # -----------------------------------------------------------------------------------
+    def ReadHumidity():
 
-    def __init__(self, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        print(data)
-
-# -----------------------------------------------------------------------------------
-# Delegate: onGyroscopeNotification
-# -----------------------------------------------------------------------------------
-class onGyroscopeNotification(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onMagnetometerNotification
-# -----------------------------------------------------------------------------------
-class onMagnetometerNotification(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onOrientationNotification
-# -----------------------------------------------------------------------------------
-class onOrientationNotification(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onRgbLedCharacteristicWrite
-# -----------------------------------------------------------------------------------
-class onRgbLedCharacteristicWrite(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-
-# -----------------------------------------------------------------------------------
-# Delegate: onBarometerCharacteristicRead
-# -----------------------------------------------------------------------------------
-class onBarometerCharacteristicRead(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onTemperatureCharacteristicRead
-# -----------------------------------------------------------------------------------
-class onTemperatureCharacteristicRead(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onHumidityCharacteristicRead
-# -----------------------------------------------------------------------------------
-class onHumidityCharacteristicRead(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onMicrophoneNotification
-# -----------------------------------------------------------------------------------
-class onMicrophoneNotification(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onAmbientLightNotification
-# -----------------------------------------------------------------------------------
-class onAmbientLightNotification(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onColorNotification
-# -----------------------------------------------------------------------------------
-class onColorNotification(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onProximityNotification
-# -----------------------------------------------------------------------------------
-class onProximityNotification(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onGestureNotification
-# -----------------------------------------------------------------------------------
-class onGestureNotification(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
-        pass
-
-# -----------------------------------------------------------------------------------
-# Delegate: onGestureNotification
-# -----------------------------------------------------------------------------------
-class onGestureNotification(btle.DefaultDelegate):
-
-    def __init__(self, params, logger):
-        btle.DefaultDelegate.__init__(self)
-        self.logger = logger
-        self.data = []
-
-    def handleNotification(self, cHandle, data):
+        h = peripheral.getCharacteristics(uuid="1201")[0]
+        if (h.supportsRead()):
+            self.logger.info("Supports: {supports}".format(supports = h.propertiesToString()))
+            val = binascii.b2a_hex(h.read())
+            val = binascii.unhexlify(val)
+            val = struct.unpack('f', val)[0]
+            self.logger.info("Humidity: {humidity:.2f}".format(humidity = val))
+        
         pass

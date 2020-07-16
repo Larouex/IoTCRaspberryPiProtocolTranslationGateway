@@ -303,21 +303,20 @@ sudo hciconfig hci0 up
 ````
 
 ## Getting Started with our Gateway Coding
-Now that we have everything ready in our development tool chains and OS environments on our desktop and the Raspberry Pi, let's get started coding!
-
-## Install the Project, Libraries and Dependancies
+Now that we have everything ready in our development tool chains and OS environments on our desktop and the Raspberry Pi, let's get started coding! We need to next clone the project and install libraries/dependancies.
 
 ### Setup all our Bluetooth Python Libraries for BlueZ
 ````bash
+cd ~
 sudo apt-get install bluez python-bluez
 sudo apt-get install libbluetooth-dev
-sudo python3 setup.py install
 wget https://github.com/pybluez/pybluez/archive/master.tar.gz
 tar xvf master.tar.gz
-cd pybluez=master
+cd pybluez-master
+sudo python3 setup.py install
 sudo apt-get install libbluetooth-dev
 sudo apt-get install libglib2.0-dev
-sudo pip install bluepy
+sudo pip3 install bluepy
 sudo python3 setup.py install
 ````
 
@@ -339,6 +338,12 @@ git clone https://github.com/Larouex/IoTCRaspberryPiProtocolTranslationGateway.g
 cd IoTCRaspberryPiProtocolTranslationGateway
 pip3 install -r requirements.txt
 ````
+We are now ready!
+
+# Overview of the Gateway Project 
+
+<b>PROTIP!</b> Consider all of the configuration work it took to prepare our Raspbarry Pi, you may want to clone your SD card and tuck it away. This will make gettign back to a clean development state easy to do. Based on your OS, there are a number of tools out there. If you create an image backup then you can use "balenaEtcher" to easily reflash you cards.
+
 
 ## SECRETS!!! - Azure Connectivity and Protecting Your Secrets
 Azure IoT Central is what we using for capturing Telemetry and Managing out Gateway and Devices. It is a powerful SaaS offering and we will be using the tools and visualizations to build out a rich application for our scenario. In order to connect our devices and gateway to IoT Central, we need to manage a set of secrets and we will store those secrets in Azure Key Vault. I highly recommend that you do this so you do not make a mistake and expose access to your application, gateway or devices.

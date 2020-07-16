@@ -1,12 +1,11 @@
 {
-  "DeviceNamePrefix": "larouex-ble-",
   "DeviceCapabilityModels": [
     {
-      "Name": "sense-",
+      "DeviceNamePrefix": "larouex-ble-sense-",
       "DCM": "urn:larouexiot:nanoble33sense:1"
     },
     {
-      "Name": "33-",
+      "DeviceNamePrefix": "larouex-ble-33-",
       "DCM": "urn:larouexiot:nanoble33:1"
     }
   ],
