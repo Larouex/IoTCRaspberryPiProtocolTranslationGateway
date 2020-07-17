@@ -34,27 +34,31 @@ import  bluetooth, hmac, sys, time, binascii, \
 import logging as Log
 
 # bluepy - Bluetooth LE interface for Python
-from bluepy import btle
+from bluepy.btle import UUID, Peripheral
 
-class NanoBLE33SENSE():
+class NanoBle33Sense():
 
-    def __init__(self, logger):
-        self.logger = logger
+    def __init__(self, Log, Address):
+        self.logger = Log
         self.data = []
+
+        # Set the Peripheral
+        self.addr = Address
+        self.peripheral = Peripheral(Address, "public")
+
+        # Load the Charateristics
+        service_characteristics = NanoBLEServices(self.logger)
+        self.characteristics = service_characteristics.data["larouex-ble-sense-"]
+
+    def __del__(self):
+        self.peripheral.disconnect()
 
     # -----------------------------------------------------------------------------------
     # Function: ReadTemperature
     # -----------------------------------------------------------------------------------
-    def ReadTemperature():
-
-        t = peripheral.getCharacteristics(uuid="1101")[0]
-        if (t.supportsRead()):
-            self.logger.info("Supports: {supports}".format(supports = t.propertiesToString()))
-            val = binascii.b2a_hex(t.read())
-            val = binascii.unhexlify(val)
-            val = struct.unpack('f', val)[0]
-            self.logger.info("Temperature: {temp:.2f}".format(temp = val))
-        
+    def ReadTemperature(self):
+        uuid = [x for x in self.characteristics["Characteristics"] if x.get("Name")=="TEMPERATURE_CHARACTERISTIC"]
+        print(uuid)
         pass
 
     # -----------------------------------------------------------------------------------

@@ -1,3 +1,4 @@
+
 # ==================================================================================
 #   File:   gateway.py
 #   Author: Larry W Jordan Jr (larouex@gmail.com)
@@ -28,102 +29,51 @@ from classes.config import Config
 from classes.dpscache import DpsCache
 from classes.symmetrickey import SymmetricKey
 from classes.nanobleservices import NanoBLEServices
-from protocoltranslation.nanoble33sense import onAccelerometerNotification
+from protocoltranslation.nanoble33sense import NanoBle33Sense
+from classes.config import Config
 
-peripheral = None
-timer = None
-
+# Workers
+config_data = None
 
 # -------------------------------------------------------------------------------
-#   Provision Devices, must be run using SUDO
+#   Provision Devices
 # -------------------------------------------------------------------------------
-async def provision_devices():
+async def provision_devices(ResetHCI, BluetoothInterface, ScanSeconds):
+
+  provisiondevices = ProvisionDevices(Log, ProvisioningScope="NEW")
+  await provisiondevices.provision_devices()
+  return True
+
+# -------------------------------------------------------------------------------
+#   Scan Devices
+# -------------------------------------------------------------------------------
+async def scan_devices(ResetHCI, BluetoothInterface, ScanSeconds):
   if not 'SUDO_UID' in os.environ.keys():
-    print("[ERROR][STOPPED] Provisioning Devices requires Super User Priveleges")
+    print("[ERROR][STOPPED] Scanning Devices requires Super User Priveleges")
     sys.exit(1)
+
+  scandevices = ScanDevices(Log, BluetoothInterface, ScanSeconds)
+  await scandevices.scan_for_devices(resethci=ResetHCI)
+  return True
+
+# -------------------------------------------------------------------------------
+#   Read Data
+# -------------------------------------------------------------------------------
+async def read_data():
 
   provisiondevices = ProvisionDevices()
   await provisiondevices.discover_and_provision_devices()
   return True
 
-def gather():
-
-    global timer
-    timer = None
-
-    #for service in dev.getServices():
-    #  print(service)
-    #  for characteristic in service.getCharacteristics():
-    #    print("Characteristic - id: %s\tname (if exists): %s\tavailable methods: %s" % (str(characteristic.uuid), str(characteristic), characteristic.propertiesToString()))
-
-
-    t = peripheral.getCharacteristics(uuid="1101")[0]
-    print(t)
-    if (t.supportsRead()):
-        print("Supports: {supports}".format(supports = t.propertiesToString()))
-        val = binascii.b2a_hex(t.read())
-        val = binascii.unhexlify(val)
-        val = struct.unpack('f', val)[0]
-        print("Temperature: {temp:.2f}".format(temp = val))
-
-    h = peripheral.getCharacteristics(uuid="1201")[0]
-    print(h)
-    if (h.supportsRead()):
-        print("Supports: {supports}".format(supports = h.propertiesToString()))
-        val = binascii.b2a_hex(h.read())
-        val = binascii.unhexlify(val)
-        val = struct.unpack('f', val)[0]
-        print("Humidity: {humidity:.2f}".format(humidity = val))
-
-
-    peripheral.setDelegate( onAccelerometerNotification(logging.getLogger()) )
-    a = peripheral.getCharacteristics(uuid="4001")[0]
-    #a.write( setup_data )
-
-    while True:
-      if a.waitForNotifications():
-        continue
-        print("Waiting...")
-
-    peripheral.disconnect()
-
-def search():         
-    devices = bluetooth.discover_devices(duration=20, lookup_names = True)
-    return devices
-
-def find_service(_device_name, _service_uuid, _characteristic_uuid):
-    print("Device Name: " + _device_name)
-    print("Service UUID: " + _service_uuid)
-    print("Characteristic UUID: " + _characteristic_uuid)
-    #service = bluetooth.find_service( name = _device_name, uuid = _service_uuid )
-    service = bluetooth.find_service(address = "C7:94:90:1C:8F:3C" )
-    
-    if service:
-      self.port = service[0]["port"]
-      self.host = service[0]["host"]
-      return 1
-    else:
-        return 0
-
-class ScanDelegate(DefaultDelegate):
-    def __init__(self):
-        DefaultDelegate.__init__(self)
-
-    def handleDiscovery(self, dev, isNewDev, isNewData):
-        if isNewDev:
-            print("Discovered device", dev.addr)
-        elif isNewData:
-            print("Received new data from", dev.addr)
-
-
 async def main(argv):
 
     # execution state from args
     is_provisiondevices = False
+    is_scandevices = False
     is_resethci = False
 
-    short_options = "hvpr"
-    long_options = ["help", "verbose", "provisiondevices", "resethci"]
+    short_options = "hvpsr"
+    long_options = ["help", "verbose", "provisiondevices", "scandevices", "resethci"]
     full_cmd_arguments = sys.argv
     argument_list = full_cmd_arguments[1:]
     try:
@@ -132,8 +82,6 @@ async def main(argv):
         print (str(err))
         #sys.exit(2)
     
-    
-
     for current_argument, current_value in arguments:
         if current_argument in ("-v", "--verbose"):
             Log.basicConfig(format="%(levelname)s: %(message)s", level=Log.DEBUG)
@@ -144,14 +92,24 @@ async def main(argv):
         if current_argument in ("-p", "--provisiondevices"):
             Log.info("Provision Devices mode...")
             is_provisiondevices = True
+        
+        if current_argument in ("-s", "--scandevices"):
+            Log.info("Scan Devices mode...")
+            is_scandevices = True
 
         if current_argument in ("-r", "--resethci"):
             Log.info("Bluetooth Reset Interface mode...")
             is_resethci = True
+    
+    # Load Configuration File
+    config = Config(Log)
+    config_data = config.data
 
-    if (is_provisiondevices):
-        provision_devices = ProvisionDevices(Log=Log)
-        await provision_devices.discover_and_provision_devices(resethci=is_resethci)
+    if (is_scandevices):
+      await scan_devices(is_resethci, config_data["BluetoothInterface"], config_data["ScanSeconds"])
+
+    elif (is_provisiondevices):
+      await provision_devices(is_resethci, config_data["BluetoothInterface"], config_data["ScanSeconds"])
 
 
 if __name__ == "__main__":
