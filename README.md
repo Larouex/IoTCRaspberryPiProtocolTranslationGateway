@@ -762,7 +762,7 @@ Let's get started at IoT Central and create an application [LINK: Welcome to IoT
 
 * Click "Create" button
 * 
-  ![alt text](./Assets/transparent-gateway-iotc-create-device-template.png "Create Device Template")     
+  ![alt text](./Assets/transparent-gateway-iotc-save-device-template.png "Save Device Template")     
  
 
 
