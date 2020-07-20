@@ -88,22 +88,25 @@ class ScanForDevices():
                 for name_dcm in self.data["DeviceCapabilityModels"]:
                   if devicename.startswith(name_dcm["DeviceNamePrefix"]):
                     self.logger.warning("[FOUND NEW DEVICE] %s" % devicename)
-                    dcm_for_device = name_dcm["DCM"]
                     new_device = True
                 
                 if new_device:
                   new_devices_discovered = True
                   
-                  # Associate the IoTC Device Template
-                  self.logger.info("[DEVICE DCM] %s" % dcm_for_device)
-                  
                   newDevice = {
                       "DeviceName": devicename, 
                       "Address": str(device.addr), 
                       "LastRSSI": "%s dB" % str(device.rssi),
-                      "DCM": dcm_for_device,
+                      "DCM": name_dcm["DCM"],
+                      "DeviceInfoInterface": name_dcm["DeviceInfoInterface"],
+                      "DeviceInfoInterfaceInstanceName": name_dcm["DeviceInfoInterfaceInstanceName"],
+                      "NanoBLEInterface": name_dcm["NanoBLEInterface"],
+                      "NanoBLEInterfaceInstanceName": name_dcm["NanoBLEInterfaceInstanceName"],
                       "LastProvisioned": None
                     } 
+                  
+                  # Associate the IoTC Device Template
+                  self.logger.info("[NEW DEVICE INFO] %s" % newDevice)
                   
                   # Merge the Data with the New Devices, this is the
                   # one we commit to the devicescache.json when completed  

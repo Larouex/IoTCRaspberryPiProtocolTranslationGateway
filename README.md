@@ -600,6 +600,10 @@ The Devices section of the file is an array of devices that match your naming pa
       "Address": "6A:6A:6A:6A:6A:6A",
       "LastRSSI": "-91 dB",
       "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface",
       "LastProvisioned": null
     }
   ]
@@ -629,7 +633,7 @@ INFO: Bluetooth Reset Interface mode...
 INFO: Loaded Config file: {'BluetoothInterface': 0, 'ScanSeconds': 10.0}
 INFO: resethci: True
 INFO: Bluetooth Interface: 0
-INFO: Loaded Devices Cache file: {'DeviceCapabilityModels': [{'DeviceNamePrefix': 'larouex-ble-sense-', 'DCM': 'urn:larouexiot:nanoble33sense:1'}, {'DeviceNamePrefix': 'larouex-ble-33-', 'DCM': 'urn:larouexiot:nanoble33:1'}], 'Devices': [{'DeviceName': 'Simulated Device', 'Address': '6A:6A:6A:6A:6A:6A', 'LastRSSI': '-91 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}]}
+INFO: Loaded Devices Cache file: {...}
 INFO: hciconfig down...
 INFO: hciconfig up...
 WARNING: Please Wait: Scanning for BLE Devices Advertising...(12 Seconds)
@@ -637,7 +641,7 @@ WARNING: [FOUND NEW DEVICE] larouex-ble-33-0002
 INFO: [DEVICE DCM] urn:larouexiot:nanoble33:1
 WARNING: [FOUND NEW DEVICE] larouex-ble-sense-0001
 INFO: [DEVICE DCM] urn:larouexiot:nanoble33sense:1
-INFO: Updated Devices Cache file: {'DeviceCapabilityModels': [{'DeviceNamePrefix': 'larouex-ble-sense-', 'DCM': 'urn:larouexiot:nanoble33sense:1'}, {'DeviceNamePrefix': 'larouex-ble-33-', 'DCM': 'urn:larouexiot:nanoble33:1'}], 'Devices': [{'DeviceName': 'Simulated Device', 'Address': '6A:6A:6A:6A:6A:6A', 'LastRSSI': '-91 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}, {'DeviceName': 'larouex-ble-33-0002', 'Address': 'fb:0a:8d:5f:79:e4', 'LastRSSI': '-62 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}, {'DeviceName': 'larouex-ble-sense-0001', 'Address': 'c7:94:90:1c:8f:3c', 'LastRSSI': '-66 dB', 'DCM': 'urn:larouexiot:nanoble33sense:1', 'LastProvisioned': None}]}
+INFO: Updated Devices Cache file: {...}
 ````
 Lot's of Information, let's run without the Debug INFO...
 ````bash
@@ -661,11 +665,19 @@ Here is what our devicescache.json file looks like with all the data captured...
   "DeviceCapabilityModels": [
     {
       "DeviceNamePrefix": "larouex-ble-sense-",
-      "DCM": "urn:larouexiot:nanoble33sense:1"
+      "DCM": "urn:larouexiot:nanoble33sense:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33SenseInterface"
     },
     {
       "DeviceNamePrefix": "larouex-ble-33-",
-      "DCM": "urn:larouexiot:nanoble33:1"
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33:NanoBLE33Interface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface"
     }
   ],
   "Devices": [
@@ -674,20 +686,32 @@ Here is what our devicescache.json file looks like with all the data captured...
       "Address": "6A:6A:6A:6A:6A:6A",
       "LastRSSI": "-91 dB",
       "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface",
       "LastProvisioned": null
     },
     {
       "DeviceName": "larouex-ble-sense-0001",
       "Address": "c7:94:90:1c:8f:3c",
-      "LastRSSI": "-61 dB",
-      "DCM": "urn:larouexiot:nanoble33sense:1",
+      "LastRSSI": "-70 dB",
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33:NanoBLE33Interface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface",
       "LastProvisioned": null
     },
     {
       "DeviceName": "larouex-ble-33-0002",
       "Address": "fb:0a:8d:5f:79:e4",
-      "LastRSSI": "-55 dB",
+      "LastRSSI": "-58 dB",
       "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33:NanoBLE33Interface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface",
       "LastProvisioned": null
     }
   ]

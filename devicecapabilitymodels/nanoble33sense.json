@@ -127,12 +127,12 @@
               "Telemetry",
               "SemanticType/Pressure"
             ],
-            "comment": "Baramoter as indicated from BLE Characteristic 9001",
+            "comment": "Barometer as indicated from BLE Characteristic 9001",
             "description": {
-              "en": "BLE Characteristic 9001 - Baramoter (millibar)"
+              "en": "BLE Characteristic 9001 - Barometer (millibar)"
             },
             "displayName": {
-              "en": "Baramoter"
+              "en": "Barometer"
             },
             "name": "uuid_9001",
             "displayUnit": {
