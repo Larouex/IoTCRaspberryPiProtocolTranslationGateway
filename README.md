@@ -531,6 +531,8 @@ https://www.bluetooth.com/specifications/assigned-numbers/generic-access-profile
 ## Scanning and Registering BLE Devices
 The next step is to turn on your BLE Devices and Scan for them using our Raspberry Pi Gateway. The scanning for BLE devices used BlueZ BLESCAN and this component requires SUDO access. I created the script to not require any installation of additional packages and also made it external to the primary gateway code.
 
+![alt text](./Assets/scan-devices-desktop.png "Scan Devices") 
+
 In your project, there is a configuration file at the root of the project folder called "devicecaches.json" and ths structure is shown below...
 ````json
 {
