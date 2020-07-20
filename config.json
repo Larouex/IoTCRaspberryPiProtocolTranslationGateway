@@ -1,4 +1,6 @@
 {
     "BluetoothInterface": 0,
-    "ScanSeconds": 10.0
+    "ResetHCI": false,
+    "ScanSeconds": 10.0,
+    "ReprovisionAllDevices": false
 }

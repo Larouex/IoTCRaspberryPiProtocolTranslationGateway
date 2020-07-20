@@ -1,10 +1,10 @@
 # ==================================================================================
-#   File:   scandevices.py
+#   File:   provisiondevices.py
 #   Author: Larry W Jordan Jr (larouex@gmail.com)
 #   Use:    Raspberry Pi "Protocol Translation" Gateway for Azure IoT Central
-#           This module scans for devices and updates the devicescache. We run
-#           it seperate as it is SUDO and we do not want to install our packages
-#           tec under sudo
+#           This module provisions devices and updates the devicescache. 
+#           It either re-provisions all devices or just those that have null in
+#           LastProvisioned option in the file i.e "LastProvisioned": null
 #
 #   Online:   www.hackinmakin.com
 #
@@ -33,12 +33,10 @@ async def scan_for_devices(BluetoothInterface, ResetHCI, ScanSeconds):
 async def main(argv):
 
     # execution state from args
-    is_resethci = False
-    scan_seconds = 0
-    bluetooth_interface = -1
+    reprovision_all_devices = None
 
-    short_options = "hvrb:s:"
-    long_options = ["help", "verbose", "resethci", "btiface=", "scanseconds="]
+    short_options = "hva"
+    long_options = ["help", "verbose", "all"]
     full_cmd_arguments = sys.argv
     argument_list = full_cmd_arguments[1:]
     try:
@@ -48,13 +46,11 @@ async def main(argv):
     
     for current_argument, current_value in arguments:
         if current_argument in ("-h", "--help"):
-            print("HELP for scandevices.py")
+            print("HELP for provisiondevices.py")
             print("------------------------------------------------------------------------------------------------------------------")
             print("-h or --help - Print out this Help Information")
             print("-v or --verbose - Debug Mode with lots of Data will be Output to Assist with Debugging")
-            print("-b or --btiface - Bluetooth Interface? '0' = Built in or '1' if you added a BT Device and Antenna, etc. (default=0)")
-            print("-r or --resethci - OS command to Reset the Bluetooth Interface (default=false)")
-            print("-s or --scanseconds - Number of Seconds the BLE Scan should Scan for Devices (default=10)")
+            print("-a or --all - Re-Provision all Devices with IoT Central (default=LastProvisioned(null))")
             print("------------------------------------------------------------------------------------------------------------------")
             sys.exit()
 
@@ -64,27 +60,16 @@ async def main(argv):
         else:
             Log.basicConfig(format="%(levelname)s: %(message)s")
         
-        if current_argument in ("-r", "--resethci"):
-            Log.info("Bluetooth Reset Interface mode...")
+        if current_argument in ("-a", "--all"):
+            Log.info("Re-Provision All Devices mode...")
             is_resethci = True
         
-        if current_argument in ("-b", "--btiface"):
-            Log.info("Bluetooth Interface Override...%s" % current_value)
-            btiface = current_value
-
-        if current_argument in ("-s", "--scanseconds"):
-            Log.info("Scan Seconds Override...%s" % current_value)
-            scan_seconds = current_value
-    
     # Load Configuration File
     config = Config(Log)
     config_data = config.data
     
-    if scan_seconds == 0:
-      scan_seconds = config_data["ScanSeconds"]
-
-    if bluetooth_interface == -1:
-      bluetooth_interface = config_data["BluetoothInterface"]
+    if reprovision_all_devices == None:
+      reprovision_all_devices = config_data["ReprovisionAllDevices"]
 
     await scan_for_devices(BluetoothInterface=bluetooth_interface, ResetHCI=is_resethci, ScanSeconds=scan_seconds)
 

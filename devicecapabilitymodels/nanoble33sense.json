@@ -116,26 +116,69 @@
     },
     {
       "@type": "InterfaceInstance",
-      "name": "ArduinoNanoBLE33Interface",
+      "name": "ArduinoNanoBLE33SenseInterface",
       "schema": {
-        "@id": "urn:larouexiot:nanoble33sense:ArduinoNanoBLE33Interface:1",
+        "@id": "urn:larouexiot:nanoble33sense:ArduinoNanoBLE33SenseInterface:1",
         "@type": "Interface",
-        "displayName": "Telemetry and Property Interface for Nano BLE 33 Sense Device",
+        "displayName": "Telemetry and Property Interface for Arduino Nano BLE 33 Sense Device",
         "contents": [
           {
-            "@type": "Telemetry",
+            "@type": [
+              "Telemetry",
+              "SemanticType/Pressure"
+            ],
+            "comment": "Baramoter as indicated from BLE Characteristic 9001",
+            "description": {
+              "en": "BLE Characteristic 9001 - Baramoter (millibar)"
+            },
             "displayName": {
-              "en": "Battery Level"
+              "en": "Baramoter"
             },
-            "name": "uuid_2001",
+            "name": "uuid_9001",
             "displayUnit": {
-              "en": "Percentage"
+              "en": "hPA"
             },
-            "schema": "integer",
+            "schema": "double",
+            "unit": "Units/Temperature/fahrenheit"
+          },
+          {
+            "@type": [
+              "Telemetry",
+              "SemanticType/Temperature"
+            ],
+            "comment": "Temperature as indicated from BLE Characteristic 1101",
+            "description": {
+              "en": "BLE Characteristic 1101 - Temperature (double)"
+            },
+            "displayName": {
+              "en": "Temperature"
+            },
+            "name": "uuid_1101",
+            "schema": "double",
+            "unit": "Units/Temperature/fahrenheit"
+          },
+          {
+            "@type": [
+              "Telemetry",
+              "SemanticType/Humidity"
+            ],
+            "comment": "Humidity as indicated from BLE Characteristic 1201",
+            "description": {
+              "en": "BLE Characteristic 1201 - Humidity (double)"
+            },
+            "displayName": {
+              "en": "Humidity"
+            },
+            "name": "uuid_1201",
+            "schema": "double",
             "unit": "Units/Humidity/percent"
           },
           {
             "@type": "Telemetry",
+            "comment": "Accelerometer as indicated from BLE Characteristic 4001",
+            "description": {
+              "en": "BLE Characteristic 4001 - Accelerometer (x,y,z)"
+            },
             "displayName": {
               "en": "Accelerometer"
             },
@@ -152,7 +195,7 @@
                     "en": "x"
                   },
                   "name": "x",
-                  "schema": "double"
+                  "schema": "float"
                 },
                 {
                   "@type": "SchemaField",
@@ -160,7 +203,7 @@
                     "en": "y"
                   },
                   "name": "y",
-                  "schema": "double"
+                  "schema": "float"
                 },
                 {
                   "@type": "SchemaField",
@@ -168,18 +211,195 @@
                     "en": "z"
                   },
                   "name": "z",
-                  "schema": "double"
+                  "schema": "float"
                 }
               ]
             }
           },
           {
             "@type": "Telemetry",
+            "comment": "Gyroscope as indicated from BLE Characteristic 5001",
+            "description": {
+              "en": "BLE Characteristic 5001 - Gyroscope (x,y,z)"
+            },
+            "displayName": {
+              "en": "Gyroscope"
+            },
+            "name": "uuid_5001",
+            "schema": {
+              "@type": "Object",
+              "displayName": {
+                "en": "Object"
+              },
+              "fields": [
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "x"
+                  },
+                  "name": "x",
+                  "schema": "float"
+                },
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "y"
+                  },
+                  "name": "y",
+                  "schema": "float"
+                },
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "z"
+                  },
+                  "name": "z",
+                  "schema": "float"
+                }
+              ]
+            }
+          },          
+          {
+            "@type": "Telemetry",
+            "comment": "Magnetometer as indicated from BLE Characteristic 6001",
+            "description": {
+              "en": "BLE Characteristic 6001 - Magnetometer (x,y,z)"
+            },
+            "displayName": {
+              "en": "Magnetometer"
+            },
+            "name": "uuid_6001",
+            "schema": {
+              "@type": "Object",
+              "displayName": {
+                "en": "Object"
+              },
+              "fields": [
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "x"
+                  },
+                  "name": "x",
+                  "schema": "float"
+                },
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "y"
+                  },
+                  "name": "y",
+                  "schema": "float"
+                },
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "z"
+                  },
+                  "name": "z",
+                  "schema": "float"
+                }
+              ]
+            }
+          },
+          {
+            "@type": "Telemetry",
+            "comment": "Orientation as indicated from BLE Characteristic 7001",
+            "description": {
+              "en": "BLE Characteristic 7001 - Magnetometer (heading,pitch,roll)"
+            },
+            "displayName": {
+              "en": "Orientation"
+            },
+            "name": "uuid_7001",
+            "schema": {
+              "@type": "Object",
+              "displayName": {
+                "en": "Object"
+              },
+              "fields": [
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "Heading"
+                  },
+                  "name": "heading",
+                  "schema": "float"
+                },
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "Pitch"
+                  },
+                  "name": "pitch",
+                  "schema": "float"
+                },
+                {
+                  "@type": "SchemaField",
+                  "displayName": {
+                    "en": "Roll"
+                  },
+                  "name": "roll",
+                  "schema": "float"
+                }
+              ]
+            }
+          },
+          {
+            "@type": "Property",
+            "comment": "Indicated from BLE Characteristic 2001",
+            "description": {
+              "en": "Current Battery Charge Level."
+            },
+            "displayName": {
+              "en": "Battery Charge %"
+            },
+            "name": "uuid_2001",
+            "writable": true,
+            "schema": "integer",
+            "unit": "Units/Humidity/percent"
+          },          
+          {
+            "@type": "Property",
+            "comment": "Indicated from BLE Characteristic 3001",
+            "description": {
+              "en": "Frequency of Telemetry Scan when in Notification or Central Connect."
+            },
+            "displayName": {
+              "en": "Telemetry Frequency in Seconds"
+            },
+            "name": "uuid_3001",
+            "writable": true,
+            "schema": "integer"
+          },
+          {
+            "@type": "Property",
+            "comment": "Indicated from ScanDevices Action in the DevicesCache file.",
+            "description": {
+              "en": "Last RSSI (Strength of Signal) from Device Connection to Gateway."
+            },
             "displayName": {
               "en": "RSSI"
             },
             "name": "rssi",
+            "writable": true,
+            "displayUnit": {
+              "en": "db"
+            },
             "schema": "integer"
+          },
+          {
+            "@type": "Property",
+            "comment": "Device Capability Model.",
+            "description": {
+              "en": "Device Capability Model Desired for Azure IoT Central."
+            },
+            "displayName": {
+              "en": "Device Capability Model"
+            },
+            "name": "uuid_9901",
+            "writable": true,
+            "schema": "string"
           }
         ]      
       }
