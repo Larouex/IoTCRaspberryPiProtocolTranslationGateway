@@ -1,4 +1,4 @@
-# Raspberry Pi "Protocol Translation" Gateway for Azure IoT Central
+# Raspberry Pi "Translation" Gateway for Azure IoT Central
 
 ![alt text](./Assets/raspberry-pi-4-hero-shot.png "Project Hero Shot") 
 
