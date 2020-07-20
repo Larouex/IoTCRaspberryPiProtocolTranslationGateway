@@ -748,12 +748,32 @@ Let's get started at IoT Central and create an application [LINK: Welcome to IoT
 * Click the "My Apps" on the sidebar
 * Select "+ New Application" from the main bar at the top
 * Click on the icon for "Custom apps"
-* Fill out the form with your application name and details and click "Create" when done.
+* Fill out the form with your application name and details and click "Create" button when done.
 
 * Next up, let's choose "Device templates" from the sidebar and Select "+ New" from the main bar at the top and you will be in the following page...
+
   ![alt text](./Assets/transparent-gateway-iotc-create-device-template.png "Create a Device Template") 
 
-* Click "IoT device" Icon and click "Next: Customize"
+* Click "IoT device" Icon and click "Next: Customize" button
+  
+  ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
+
+* Enter "NanoBLE33Sense" in the "Device template name" field click "Next: Review" button
+
+  ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
+ 
+* Click "Create" button
+
+  ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
+
+* Click the "Import capability model" Icon
+
+  ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
+ 
+* Select the file named "nanoble33sense.json" from the location you cloned the project onto your desktop machine (i.e. ./IoTCRaspberryPiProtocolTranslationGateway/devicecapabilitymodels)
+
+  ![alt text](./Assets/transparent-gateway-iotc-import-dcm-select-file.png "Import Device Template File")
+
 
 Provisioning follows the same pattern as ScanDevices in that we have separated this script into a "stand-alone" operation. 
 
