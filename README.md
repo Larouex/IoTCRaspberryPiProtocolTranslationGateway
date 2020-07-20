@@ -7,12 +7,16 @@ This repository is part of a training and project series for Azure IoT Central. 
 
 [LINK: Training & Project Site for Raspberry Pi Gateway and Arduino Nano BLE Devices for Azure Iot Central](http://www.hackinmakin.com/Raspberry%20Pi%20Gateway%20and%20BLE/index.html)
 
-This project will enable a Raspberry Pi to act as a "Protocol Translation" Gateway connected to Azure IoT Central and send Telemerty on behalf of of the Devices we have created for this project. 
+This project will enable a Raspberry Pi to act as a "Translation" Gateway and supports a number of scenraios...
+
+* <b>Protocol Translation</b> - Translate the Bluetooth Notify and Charatertics Data into Json and send to Azure Iot Central.
+* <b>Protocol & Identity Translation</b> - Translate the Bluetooth Notify and Charatertics Data into Json and send to Azure Iot Central and create Leaf Devices for each BLE Device.
+* <b>Opaque Gateway with Identity Translation</b> - Translate the Bluetooth Notify and Charatertics Data into Json and send to Azure Iot Central and transparently Provision Devices for each BLE Device.
 
 ![Protocol Translation Gateway](./Assets/gateway-protocol-lrg.png)
 
 ## Features
-This project is primarly a training and education project that is fully realized. You can take the componants and build out a working IoT system end to end.
+This project is primarly a training and education project that is fully realized. You can take the components and build out a working IoT system end to end.
 
 * Automated Regisration and Provisioing of Nano BLE Devices
 
