@@ -752,17 +752,19 @@ Let's get started at IoT Central and create an application [LINK: Welcome to IoT
 
 * Next up, let's choose "Device templates" from the sidebar and Select "+ New" from the main bar at the top and you will be in the following page...
 
+* Click "IoT device" Icon and click "Next: Customize" button
+
   ![alt text](./Assets/transparent-gateway-iotc-create-device-template.png "Create a Device Template") 
 
-* Click "IoT device" Icon and click "Next: Customize" button
+* Enter "NanoBLE33Sense" in the "Device template name" field click "Next: Review" button
   
   ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
 
-* Enter "NanoBLE33Sense" in the "Device template name" field click "Next: Review" button
-
-  ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
- 
 * Click "Create" button
+* 
+  ![alt text](./Assets/transparent-gateway-iotc-create-device-template.png "Create Device Template")     
+ 
+
 
   ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
 
