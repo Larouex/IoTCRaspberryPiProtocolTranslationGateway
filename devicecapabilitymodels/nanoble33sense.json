@@ -2,7 +2,7 @@
   "@id": "urn:larouexiot:nanoble33sense:1",
   "@type": "CapabilityModel",
   "displayName": "Arduino Nano BLE 33 Sense for IoT to Central",
-  "description": "Arduino Nano BLE 33 Sense for IoT to Central - Full Sensor Template - July 2020",
+  "description": "Full Sensor Template - July 2020",
   "@context": [
     "http://azureiot.com/v1/contexts/IoTModel.json"
   ],
@@ -116,11 +116,11 @@
     },
     {
       "@type": "InterfaceInstance",
-      "name": "ArduinoNanoBLE33SenseInterface",
+      "name": "NanoBLE33SenseInterface",
       "schema": {
-        "@id": "urn:larouexiot:nanoble33sense:ArduinoNanoBLE33SenseInterface:1",
+        "@id": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
         "@type": "Interface",
-        "displayName": "Telemetry and Property Interface for Arduino Nano BLE 33 Sense Device",
+        "displayName": "Telemetry Property Interface for Arduino Nano BLE 33 Sense",
         "contents": [
           {
             "@type": [
@@ -138,8 +138,7 @@
             "displayUnit": {
               "en": "hPA"
             },
-            "schema": "double",
-            "unit": "Units/Temperature/fahrenheit"
+            "schema": "double"
           },
           {
             "@type": [
