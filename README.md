@@ -741,6 +741,19 @@ That is an overview of  the purpose of scandevices.py: It finds advertising devi
 I encourage you to look over the scandevices.py [LINK: scandevices.py](./scandevices.py) and the class that is uses to do all of the scanning and configuration [LINK: classes/scanfordevices.py](./classes/scanfordevices.py).
 
 ## Provisioning our Devices in Azure IoT Central
+The next thing we get to do is work on our Device Template in Azure IoT Central. The first gateway type we are going to create for Provisioning is a "TRANSPARENT" gateway where it looks like our BLE devices are connected directly to IoT Central.
+
+Let's get started at IoT Central and create an application [LINK: Welcome to IoT Central](http://apps.azureiotcentral.com/ )
+
+* Click the "My Apps" on the sidebar
+* Select "+ New Application" from the main bar at the top
+* Click on the icon for "Custom apps"
+* Fill out the form with your application name and details and click "Create" when done.
+
+Next up, let's choose "Device templates" from the sidebar and Select "+ New" from the main bar at the top
+![alt text](./Assets/transparent-gateway-iotc-create-device-template.png "Create a Device Template") 
+
+
 Provisioning follows the same pattern as ScanDevices in that we have separated this script into a "stand-alone" operation. 
 
 There are excellent tutorials on connecting devices to IoT Central and using Device Provisioning Services online and we won't try to repeat that here. If you are not familar, take a break and visit these topics...
@@ -762,6 +775,3 @@ Provisioning in our Gateway project is one of key pillars of capabilities we hav
   * <b>PROTOCOL</b> - IoT Central will show a Single Gateway and all Data is Associated with the Gateway
   * <b>PROTOCOLWITHIDENTITY</b> - IoT Central will show a Single Gateway and Leaf Devices
 
-
-
-ProvisioningScope
