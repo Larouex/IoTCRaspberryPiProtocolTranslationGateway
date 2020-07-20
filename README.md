@@ -539,11 +539,19 @@ In your project, there is a configuration file at the root of the project folder
   "DeviceCapabilityModels": [
     {
       "DeviceNamePrefix": "larouex-ble-sense-",
-      "DCM": "urn:larouexiot:nanoble33sense:1"
+      "DCM": "urn:larouexiot:nanoble33sense:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33SenseInterface"
     },
     {
       "DeviceNamePrefix": "larouex-ble-33-",
-      "DCM": "urn:larouexiot:nanoble33:1"
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33:NanoBLE33Interface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface"
     }
   ],
   "Devices": [
@@ -552,6 +560,10 @@ In your project, there is a configuration file at the root of the project folder
       "Address": "6A:6A:6A:6A:6A:6A",
       "LastRSSI": "-91 dB",
       "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface",
       "LastProvisioned": null
     }
   ]
@@ -573,15 +585,22 @@ build_flags =
 ````
 This section in "devicescache.json" identifies the pattern that your device advertises via BLE...
 ````json
-{
   "DeviceCapabilityModels": [
     {
       "DeviceNamePrefix": "larouex-ble-sense-",
-      "DCM": "urn:larouexiot:nanoble33sense:1"
+      "DCM": "urn:larouexiot:nanoble33sense:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33SenseInterface"
     },
     {
       "DeviceNamePrefix": "larouex-ble-33-",
-      "DCM": "urn:larouexiot:nanoble33:1"
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33:NanoBLE33Interface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface"
     }
   ],
   ...
@@ -593,7 +612,7 @@ This section in "devicescache.json" identifies the pattern that your device adve
 The Devices section of the file is an array of devices that match your naming pattern. There is a "dummy" record for a Simulated device and this is there for reference and is ignored in all situations.
 ````json
 {
-...
+  ...
   "Devices": [
     {
       "DeviceName": "Simulated Device",
