@@ -72,7 +72,7 @@ class ScanForDevices():
             # Scan the BLE's that are Advertising
             self.logger.warning("Please Wait: Scanning for BLE Devices Advertising...(%s Seconds)" % self.scan_seconds)
             scanner = Scanner(self.iface).withDelegate(ScanDelegate())
-            devices = scanner.scan(self.scan_seconds)
+            devices = scanner.scan(float(self.scan_seconds))
 
             # Check the devices and add the ones that match the pattern indicated in
             # the devicescache.json file element [DeviceNamePrefix]...
@@ -87,12 +87,12 @@ class ScanForDevices():
                 dcm_for_device = None
                 for name_dcm in self.data["DeviceCapabilityModels"]:
                   if devicename.startswith(name_dcm["DeviceNamePrefix"]):
+                    self.logger.warning("[FOUND NEW DEVICE] %s" % devicename)
                     dcm_for_device = name_dcm["DCM"]
                     new_device = True
                 
                 if new_device:
                   new_devices_discovered = True
-                  self.logger.warning("[FOUND NEW DEVICE] %s" % devicename)
                   
                   # Associate the IoTC Device Template
                   self.logger.info("[DEVICE DCM] %s" % dcm_for_device)

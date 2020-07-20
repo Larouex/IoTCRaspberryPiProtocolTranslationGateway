@@ -16,9 +16,8 @@ This project will enable a Raspberry Pi to act as a "Translation" Gateway and su
 ![Protocol Translation Gateway](./Assets/gateway-protocol-lrg.png)
 
 ## Features
-This project is primarly a training and education project that is fully realized. You can take the components and build out a working IoT system end to end.
+This project is primarly a training and education project that is fully realized and you take the project, components and build out your own working IoT system end to end.
 
-* Automated Regisration and Provisioing of Nano BLE Devices
 
 You may want to try the supporting projects for the Nano BLE Devices if you landed here out of sequence.
 
@@ -346,7 +345,7 @@ We are now ready!
 
 # Overview of the Gateway Project 
 
-<b>PROTIP!</b> Consider all of the configuration work it took to prepare our Raspbarry Pi, you may want to clone your SD card and tuck it away. This will make gettign back to a clean development state easy to do. Based on your OS, there are a number of tools out there. If you create an image backup then you can use "balenaEtcher" to easily reflash you cards.
+<b>PROTIP!</b> Consider all of the configuration work it took to prepare our Raspberry Pi, you may want to clone your SD card and tuck it away for ease of getting this point in future with a clean development state. Based on your OS, there are a number of tools out there to clobe the SD card image. You can then use your image backup with "balenaEtcher" to flash your card.
 
 
 ## SECRETS!!! - Azure Connectivity and Protecting Your Secrets
@@ -561,7 +560,7 @@ In your project, there is a configuration file at the root of the project folder
 Let's review the file stucture...
 
 #### DeviceCapabilityModels
-This section is the "pattern" match for your BLE devices. Let's jump back (if you have not built a Nano device in this project, you should do that now). In the Nano BLE projects, we have a file that is global to the project called "Platform.ini" and in the file we designate the following when building a device...
+This section is the "pattern" match for your BLE devices. Let's jump back (if you have not built out a Nano BLE device for this project, you should do that now or have a BLE simulation running using LightBlue, etc.) to our Nano BLE projects where we have a file that is global to the project called "Platform.ini" and in that file we have designated the following when building and deploying to the device...
 
 ````yaml
 [common_env_data]
@@ -572,7 +571,7 @@ build_flags =
     -D SERVICE_UUID="6F165338-0001-43B9-837B-41B1A3C86EC1"
     -D DEBUG=1
 ````
-So this section identifies the pattern that your device advertises via BLE...
+This section in "devicescache.json" identifies the pattern that your device advertises via BLE...
 ````json
 {
   "DeviceCapabilityModels": [
@@ -614,28 +613,46 @@ Let's run our scan devices Python script and find our devices. I have two BLE de
 #### Scan Devices Options
 There are a few options for the Scan Device script that you can override...
 
-* <b>help</b> - Print out this Help Information
-* <b>verbose</b> -  Debug Mode- Lots of Data will be Output to Assist with Debugging
-* <b>btiface</b> - What Bluetooth Device are you using? "0" = Built into the Raspberry Pi or "1" if you added a more Powerful BT Device and Antenna, etc. (default=0)
-* <b>resethci</b> - OS command to Reset the Bluetooth Interface (default=false)
-* <b>scanseconds</b> - Number of Seconds the BLE Scan should Scan for Devices (default=10)
-
+* <b>-h or --help</b> - Print out this Help Information
+* <b>-v or --verbose</b> -  Debug Mode with lots of Data will be Output to Assist with Debugging
+* <b>-b or --btiface</b> - Bluetooth Interface? '0' = Built in or '1' if you added a BT Device and Antenna, etc. (default=0)
+* <b>-r or --resethci</b> - OS command to Reset the Bluetooth Interface (default=false)
+* <b>-s or --scanseconds</b> - Number of Seconds the BLE Scan should Scan for Devices (default=10)
 
 ````bash
-sudo python3 ./scandevices --v --r --btiface 0 --scanseconds 11
-````
-Your should see output...
-````bash
+sudo python3 ./scandevices -v -r -b 0 - 12
+>>>
 INFO: Verbose mode...
+INFO: Bluetooth Interface Override...0
+INFO: Scan Seconds Override...12
 INFO: Bluetooth Reset Interface mode...
 INFO: Loaded Config file: {'BluetoothInterface': 0, 'ScanSeconds': 10.0}
 INFO: resethci: True
+INFO: Bluetooth Interface: 0
 INFO: Loaded Devices Cache file: {'DeviceCapabilityModels': [{'DeviceNamePrefix': 'larouex-ble-sense-', 'DCM': 'urn:larouexiot:nanoble33sense:1'}, {'DeviceNamePrefix': 'larouex-ble-33-', 'DCM': 'urn:larouexiot:nanoble33:1'}], 'Devices': [{'DeviceName': 'Simulated Device', 'Address': '6A:6A:6A:6A:6A:6A', 'LastRSSI': '-91 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}]}
 INFO: hciconfig down...
 INFO: hciconfig up...
-WARNING: Please Wait: Scanning for BLE Devices Advertising...(10.0 Seconds)
+WARNING: Please Wait: Scanning for BLE Devices Advertising...(12 Seconds)
+WARNING: [FOUND NEW DEVICE] larouex-ble-33-0002
 INFO: [DEVICE DCM] urn:larouexiot:nanoble33:1
 WARNING: [FOUND NEW DEVICE] larouex-ble-sense-0001
 INFO: [DEVICE DCM] urn:larouexiot:nanoble33sense:1
-INFO: Updated Devices Cache file: {'DeviceCapabilityModels': [{'DeviceNamePrefix': 'larouex-ble-sense-', 'DCM': 'urn:larouexiot:nanoble33sense:1'}, {'DeviceNamePrefix': 'larouex-ble-33-', 'DCM': 'urn:larouexiot:nanoble33:1'}], 'Devices': [{'DeviceName': 'Simulated Device', 'Address': '6A:6A:6A:6A:6A:6A', 'LastRSSI': '-91 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}, {'DeviceName': 'larouex-ble-33-0002', 'Address': 'fb:0a:8d:5f:79:e4', 'LastRSSI': '-66 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}, {'DeviceName': 'larouex-ble-sense-0001', 'Address': 'c7:94:90:1c:8f:3c', 'LastRSSI': '-68 dB', 'DCM': 'urn:larouexiot:nanoble33sense:1', 'LastProvisioned': None}]}
+INFO: Updated Devices Cache file: {'DeviceCapabilityModels': [{'DeviceNamePrefix': 'larouex-ble-sense-', 'DCM': 'urn:larouexiot:nanoble33sense:1'}, {'DeviceNamePrefix': 'larouex-ble-33-', 'DCM': 'urn:larouexiot:nanoble33:1'}], 'Devices': [{'DeviceName': 'Simulated Device', 'Address': '6A:6A:6A:6A:6A:6A', 'LastRSSI': '-91 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}, {'DeviceName': 'larouex-ble-33-0002', 'Address': 'fb:0a:8d:5f:79:e4', 'LastRSSI': '-62 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}, {'DeviceName': 'larouex-ble-sense-0001', 'Address': 'c7:94:90:1c:8f:3c', 'LastRSSI': '-66 dB', 'DCM': 'urn:larouexiot:nanoble33sense:1', 'LastProvisioned': None}]}
 ````
+Lot's of Information, let's run without the Debug INFO...
+````bash
+sudo python3 ./scandevices -r -b 0 - 12
+>>>
+WARNING: Please Wait: Scanning for BLE Devices Advertising...(12 Seconds)
+WARNING: [FOUND NEW DEVICE] larouex-ble-sense-0001
+WARNING: [FOUND NEW DEVICE] larouex-ble-33-0002
+````
+Nice and terse. Let's run it again for Idempotency...
+````bash
+sudo python3 ./scandevices -r -b 0 - 12
+>>>
+WARNING: Please Wait: Scanning for BLE Devices Advertising...(12 Seconds)
+WARNING: [ALREADY DISCOVERED, SKIPPING] larouex-ble-sense-0001
+WARNING: [ALREADY DISCOVERED, SKIPPING] larouex-ble-33-0002
+````
+

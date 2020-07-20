@@ -37,17 +37,27 @@ async def main(argv):
     scan_seconds = 0
     bluetooth_interface = -1
 
-    short_options = "hvrbs"
-    long_options = ["help", "verbose", "resethci", "btiface", "scanseconds"]
+    short_options = "hvrb:s:"
+    long_options = ["help", "verbose", "resethci", "btiface=", "scanseconds="]
     full_cmd_arguments = sys.argv
     argument_list = full_cmd_arguments[1:]
     try:
         arguments, values = getopt.getopt(argument_list, short_options, long_options)
     except getopt.error as err:
         print (str(err))
-        #sys.exit(2)
     
     for current_argument, current_value in arguments:
+        if current_argument in ("-h", "--help"):
+            print("HELP for ScanDevices.py")
+            print("------------------------------------------------------------------------------------------------------------------")
+            print("-h or --help - Print out this Help Information")
+            print("-v or --verbose - Debug Mode with lots of Data will be Output to Assist with Debugging")
+            print("-b or --btiface - Bluetooth Interface? '0' = Built in or '1' if you added a BT Device and Antenna, etc. (default=0)")
+            print("-r or --resethci - OS command to Reset the Bluetooth Interface (default=false)")
+            print("-s or --scanseconds - Number of Seconds the BLE Scan should Scan for Devices (default=10)")
+            print("------------------------------------------------------------------------------------------------------------------")
+            sys.exit()
+
         if current_argument in ("-v", "--verbose"):
             Log.basicConfig(format="%(levelname)s: %(message)s", level=Log.DEBUG)
             Log.info("Verbose mode...")

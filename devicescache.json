@@ -18,17 +18,17 @@
       "LastProvisioned": null
     },
     {
-      "DeviceName": "larouex-ble-33-0002",
-      "Address": "fb:0a:8d:5f:79:e4",
-      "LastRSSI": "-66 dB",
-      "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceName": "larouex-ble-sense-0001",
+      "Address": "c7:94:90:1c:8f:3c",
+      "LastRSSI": "-61 dB",
+      "DCM": "urn:larouexiot:nanoble33sense:1",
       "LastProvisioned": null
     },
     {
-      "DeviceName": "larouex-ble-sense-0001",
-      "Address": "c7:94:90:1c:8f:3c",
-      "LastRSSI": "-68 dB",
-      "DCM": "urn:larouexiot:nanoble33sense:1",
+      "DeviceName": "larouex-ble-33-0002",
+      "Address": "fb:0a:8d:5f:79:e4",
+      "LastRSSI": "-55 dB",
+      "DCM": "urn:larouexiot:nanoble33:1",
       "LastProvisioned": null
     }
   ]
