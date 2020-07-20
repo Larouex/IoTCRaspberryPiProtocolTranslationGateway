@@ -584,5 +584,46 @@ So this section identifies the pattern that your device advertises via BLE...
   ],
   ...
 ````
-* DeviceNamePrefix - The naming pattern your BLE devices start with
-* DCM - The Device Capability Model Identity in IoT Central
+* <b>DeviceNamePrefix</b> - The naming pattern your BLE devices start with...
+* <b>DCM</b> - The Device Capability Model Identity in IoT Central
+
+#### Registering the Devices
+The Devices section of the file is an array of devices that match your naming pattern. There is a "dummy" record for a Simulated device and this is there for reference and is ignored in all situations.
+````json
+{
+...
+  "Devices": [
+    {
+      "DeviceName": "Simulated Device",
+      "Address": "6A:6A:6A:6A:6A:6A",
+      "LastRSSI": "-91 dB",
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "LastProvisioned": null
+    }
+  ]
+}
+````
+Let's run our scan devices Python script and find our devices. I have two BLE devices running before I executed the script...
+
+* larouex-ble-sense-0001
+* larouex-ble-33-0002
+
+````bash
+sudo python3 ./scandevices --v --r
+````
+Your should see output...
+````bash
+INFO: Verbose mode...
+INFO: Bluetooth Reset Interface mode...
+INFO: Loaded Config file: {'BluetoothInterface': 0, 'ScanSeconds': 10.0}
+INFO: resethci: True
+INFO: Loaded Devices Cache file: {'DeviceCapabilityModels': [{'DeviceNamePrefix': 'larouex-ble-sense-', 'DCM': 'urn:larouexiot:nanoble33sense:1'}, {'DeviceNamePrefix': 'larouex-ble-33-', 'DCM': 'urn:larouexiot:nanoble33:1'}], 'Devices': [{'DeviceName': 'Simulated Device', 'Address': '6A:6A:6A:6A:6A:6A', 'LastRSSI': '-91 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}]}
+INFO: hciconfig down...
+INFO: hciconfig up...
+WARNING: Please Wait: Scanning for BLE Devices Advertising...(10.0 Seconds)
+WARNING: [FOUND NEW DEVICE] larouex-ble-33-0002
+INFO: [DEVICE DCM] urn:larouexiot:nanoble33:1
+WARNING: [FOUND NEW DEVICE] larouex-ble-sense-0001
+INFO: [DEVICE DCM] urn:larouexiot:nanoble33sense:1
+INFO: Updated Devices Cache file: {'DeviceCapabilityModels': [{'DeviceNamePrefix': 'larouex-ble-sense-', 'DCM': 'urn:larouexiot:nanoble33sense:1'}, {'DeviceNamePrefix': 'larouex-ble-33-', 'DCM': 'urn:larouexiot:nanoble33:1'}], 'Devices': [{'DeviceName': 'Simulated Device', 'Address': '6A:6A:6A:6A:6A:6A', 'LastRSSI': '-91 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}, {'DeviceName': 'larouex-ble-33-0002', 'Address': 'fb:0a:8d:5f:79:e4', 'LastRSSI': '-66 dB', 'DCM': 'urn:larouexiot:nanoble33:1', 'LastProvisioned': None}, {'DeviceName': 'larouex-ble-sense-0001', 'Address': 'c7:94:90:1c:8f:3c', 'LastRSSI': '-68 dB', 'DCM': 'urn:larouexiot:nanoble33sense:1', 'LastProvisioned': None}]}
+````
