@@ -740,10 +740,10 @@ That is an overview of  the purpose of scandevices.py: It finds advertising devi
 
 I encourage you to look over the scandevices.py [LINK: scandevices.py](./scandevices.py) and the class that is uses to do all of the scanning and configuration [LINK: classes/scanfordevices.py](./classes/scanfordevices.py).
 
-## Provisioning our Devices in Azure IoT Central
+## Create our Device Template in Azure IoT Central
 The next thing we get to do is work on our Device Template in Azure IoT Central. The first gateway type we are going to create for Provisioning is a "TRANSPARENT" gateway where it looks like our BLE devices are connected directly to IoT Central.
 
-Let's get started at IoT Central and create an application [LINK: Welcome to IoT Central](http://apps.azureiotcentral.com/ )
+Let's get started at IoT Central and create an application [LINK: Welcome to IoT Central](http://apps.azureiotcentral.com/)
 
 * Click the "My Apps" on the sidebar
 * Select "+ New Application" from the main bar at the top
@@ -772,7 +772,19 @@ Let's get started at IoT Central and create an application [LINK: Welcome to IoT
 
   ![alt text](./Assets/transparent-gateway-iotc-import-dcm-select-file.png "Import Device Template File")
 
+* Now we have a full fidelity "Device Template" for our Nano BLE 33 Sense board. You can check out the board [LINK: Github Project: IoTCNanoBLESense33](https://github.com/Larouex/IoTCNanoBLESense33)
 
+  ![alt text](./Assets/transparent-gateway-iotc-dcm-ready.png "Ready Device Template File")
+
+  ![alt text](./Assets/transparent-gateway-iotc-dcm-view-interface.png "View Device Template File")
+
+* Click the "Publish" option on main bar at the top of the page and click the "Publish" button
+
+  ![alt text](./Assets/transparent-gateway-iotc-publish-dcm.png "Publish Device Template")
+
+<b>CONGRATULATIONS</b> We have created our IoT Central Application and Published our Device Template, we are ready to Provision our Devices using a TRANSPARENT GATEWAY technique.
+
+## Provisioning our Devices in Azure IoT Central
 Provisioning follows the same pattern as ScanDevices in that we have separated this script into a "stand-alone" operation. 
 
 There are excellent tutorials on connecting devices to IoT Central and using Device Provisioning Services online and we won't try to repeat that here. If you are not familar, take a break and visit these topics...
