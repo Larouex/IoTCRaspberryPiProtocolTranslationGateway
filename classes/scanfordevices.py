@@ -1,5 +1,5 @@
 # ==================================================================================
-#   File:   scandevices.py
+#   File:   scanfordevices.py
 #   Author: Larry W Jordan Jr (larouex@gmail.com)
 #   Use:    Scans for BLW Devices and updates the cache file
 #
@@ -29,23 +29,25 @@ class ScanDelegate(DefaultDelegate):
 # -------------------------------------------------------------------------------
 #   ScanDevices Class
 # -------------------------------------------------------------------------------
-class ScanDevices():
+class ScanForDevices():
 
     timer = None
     timer_ran = False
     dcm_value = None
 
-    def __init__(self, Log, IFace, ScanSeconds):
+    def __init__(self, Log, IFace, ResetHCI, ScanSeconds):
         self.logger = Log
         self.data = []
         self.new_devices = []
         self.characteristics = []
         self.iface = IFace
+        self.resethci = ResetHCI
         self.scan_seconds = ScanSeconds
   
-    async def scan_for_devices(self, resethci):
+    async def scan_for_devices(self):
 
-        self.logger.info("resethci: %s" % str(resethci))
+        self.logger.info("resethci: %s" % str(self.resethci))
+        self.logger.info("Bluetooth Interface: %s" % str(self.iface))
 
         # Write flag
         new_devices_discovered = False
@@ -57,7 +59,7 @@ class ScanDevices():
         # Make a working copy of the cache file
         self.data = devicescache.data
 
-        if resethci:
+        if self.resethci:
             try:
                 self.logger.info("hciconfig down..." )
                 os.system("sudo hciconfig hci%s down" % self.iface)

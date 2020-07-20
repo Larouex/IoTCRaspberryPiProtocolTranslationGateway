@@ -533,7 +533,8 @@ The next step is to turn on your BLE Devices and Scan for them using our Raspber
 
 ![alt text](./Assets/scan-devices-desktop.png "Scan Devices") 
 
-In your project, there is a configuration file at the root of the project folder called "devicecaches.json" and ths structure is shown below...
+In your project, there is a configuration file at the root of the project folder called "devicescache.json" [LINK: devicescache.json](./devicescache.json) and the structure of this file is shown below...
+
 ````json
 {
   "DeviceCapabilityModels": [
@@ -610,8 +611,18 @@ Let's run our scan devices Python script and find our devices. I have two BLE de
 * larouex-ble-sense-0001
 * larouex-ble-33-0002
 
+#### Scan Devices Options
+There are a few options for the Scan Device script that you can override...
+
+* <b>help</b> - Print out this Help Information
+* <b>verbose</b> -  Debug Mode- Lots of Data will be Output to Assist with Debugging
+* <b>btiface</b> - What Bluetooth Device are you using? "0" = Built into the Raspberry Pi or "1" if you added a more Powerful BT Device and Antenna, etc. (default=0)
+* <b>resethci</b> - OS command to Reset the Bluetooth Interface (default=false)
+* <b>scanseconds</b> - Number of Seconds the BLE Scan should Scan for Devices (default=10)
+
+
 ````bash
-sudo python3 ./scandevices --v --r
+sudo python3 ./scandevices --v --r --btiface 0 --scanseconds 11
 ````
 Your should see output...
 ````bash

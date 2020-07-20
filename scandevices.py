@@ -15,28 +15,30 @@ import  getopt, sys, time, string, threading, asyncio, os
 import logging as Log
 
 # our classes
-from classes.scandevices import ScanDevices
+from classes.scanfordevices import ScanForDevices
 from classes.config import Config
 
 # -------------------------------------------------------------------------------
-#   Scan Devices
+#   Scan For Devices
 # -------------------------------------------------------------------------------
-async def scan_devices(ResetHCI, BluetoothInterface, ScanSeconds):
+async def scan_for_devices(BluetoothInterface, ResetHCI, ScanSeconds):
   if not 'SUDO_UID' in os.environ.keys():
     print("[ERROR][STOPPED] Scanning Devices requires Super User Priveleges")
     sys.exit(1)
 
-  scandevices = ScanDevices(Log, BluetoothInterface, ScanSeconds)
-  await scandevices.scan_for_devices(resethci=ResetHCI)
+  scanfordevices = ScanForDevices(Log, BluetoothInterface, ResetHCI, ScanSeconds)
+  await scanfordevices.scan_for_devices()
   return True
 
 async def main(argv):
 
     # execution state from args
     is_resethci = False
+    scan_seconds = 0
+    bluetooth_interface = -1
 
-    short_options = "hvr"
-    long_options = ["help", "verbose", "resethci"]
+    short_options = "hvrbs"
+    long_options = ["help", "verbose", "resethci", "btiface", "scanseconds"]
     full_cmd_arguments = sys.argv
     argument_list = full_cmd_arguments[1:]
     try:
@@ -55,12 +57,26 @@ async def main(argv):
         if current_argument in ("-r", "--resethci"):
             Log.info("Bluetooth Reset Interface mode...")
             is_resethci = True
+        
+        if current_argument in ("-b", "--btiface"):
+            Log.info("Bluetooth Interface Override...%s" % current_value)
+            btiface = current_value
+
+        if current_argument in ("-s", "--scanseconds"):
+            Log.info("Scan Seconds Override...%s" % current_value)
+            scan_seconds = current_value
     
     # Load Configuration File
     config = Config(Log)
     config_data = config.data
+    
+    if scan_seconds == 0:
+      scan_seconds = config_data["ScanSeconds"]
 
-    await scan_devices(is_resethci, config_data["BluetoothInterface"], config_data["ScanSeconds"])
+    if bluetooth_interface == -1:
+      bluetooth_interface = config_data["BluetoothInterface"]
+
+    await scan_for_devices(BluetoothInterface=bluetooth_interface, ResetHCI=is_resethci, ScanSeconds=scan_seconds)
 
 if __name__ == "__main__":
     asyncio.run(main(sys.argv[1:]))
