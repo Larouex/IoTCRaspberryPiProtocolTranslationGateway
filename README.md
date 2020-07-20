@@ -623,7 +623,6 @@ INFO: Loaded Devices Cache file: {'DeviceCapabilityModels': [{'DeviceNamePrefix'
 INFO: hciconfig down...
 INFO: hciconfig up...
 WARNING: Please Wait: Scanning for BLE Devices Advertising...(10.0 Seconds)
-WARNING: [FOUND NEW DEVICE] larouex-ble-33-0002
 INFO: [DEVICE DCM] urn:larouexiot:nanoble33:1
 WARNING: [FOUND NEW DEVICE] larouex-ble-sense-0001
 INFO: [DEVICE DCM] urn:larouexiot:nanoble33sense:1
