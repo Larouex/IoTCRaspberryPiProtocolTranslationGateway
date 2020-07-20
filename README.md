@@ -753,14 +753,14 @@ Provisioning in our Gateway project is one of key pillars of capabilities we hav
 * <b>-h or --help</b> - Print out this Help Information
 * <b>-v or --verbose</b> -  Debug Mode with lots of Data will be Output to Assist with Debugging
 * <b>-p or --provisioningscope</b> - Provisioning Scope give you fine grained control over the devices you want to provision. 
-  * ALL - Re-Provision Every device listed in the DevicesCache.json file
-  * NEW - Only Provision Devices DevicesCache.json file that have "LastProvisioned=Null"
-  * <device name> - Provision a Specifc Device in DevicesCache.json file
+  * <b>ALL</b> - Re-Provision Every device listed in the DevicesCache.json file
+  * <b>NEW</b> - Only Provision Devices DevicesCache.json file that have "LastProvisioned=Null"
+  * <b>device name</b> - Provision a Specifc Device in DevicesCache.json file
 * <b>-g or --gatewaytype</b> - Indicate the Type of Gateway Relationship
-  * OPAQUE - Devices will look like Stand-Alone Devices in IoT Central
-  * TRANSPARENT - Devices will look like Stand-Alone Devices in IoT Central
-  * PROTOCOL - IoT Central will show a Single Gateway and all Data is Associated with the Gateway
-  * PROTOCOLWITHIDENTITY - IoT Central will show a Single Gateway and Leaf Devices
+  * <b>OPAQUE</b> - Devices will look like Stand-Alone Devices in IoT Central
+  * <b>TRANSPARENT</b> - Devices will look like Stand-Alone Devices in IoT Central
+  * <b>PROTOCOL</b> - IoT Central will show a Single Gateway and all Data is Associated with the Gateway
+  * <b>PROTOCOLWITHIDENTITY</b> - IoT Central will show a Single Gateway and Leaf Devices
 
 
 
