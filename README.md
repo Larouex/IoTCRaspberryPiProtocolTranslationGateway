@@ -655,8 +655,45 @@ WARNING: Please Wait: Scanning for BLE Devices Advertising...(12 Seconds)
 WARNING: [ALREADY DISCOVERED, SKIPPING] larouex-ble-sense-0001
 WARNING: [ALREADY DISCOVERED, SKIPPING] larouex-ble-33-0002
 ````
-
-That is what the purpose of scandevices.py does: It finds advertising devices using BLEScan and and writes the data to the devicescache.json [LINK: devicescache.json](./devicescache.json). That is all that is does, we have not provisioned our devices as of yet in Azure Iot Central, that is our next step!
+Here is what our devicescache.json file looks like with all the data captured...
+````json
+{
+  "DeviceCapabilityModels": [
+    {
+      "DeviceNamePrefix": "larouex-ble-sense-",
+      "DCM": "urn:larouexiot:nanoble33sense:1"
+    },
+    {
+      "DeviceNamePrefix": "larouex-ble-33-",
+      "DCM": "urn:larouexiot:nanoble33:1"
+    }
+  ],
+  "Devices": [
+    {
+      "DeviceName": "Simulated Device",
+      "Address": "6A:6A:6A:6A:6A:6A",
+      "LastRSSI": "-91 dB",
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "LastProvisioned": null
+    },
+    {
+      "DeviceName": "larouex-ble-sense-0001",
+      "Address": "c7:94:90:1c:8f:3c",
+      "LastRSSI": "-61 dB",
+      "DCM": "urn:larouexiot:nanoble33sense:1",
+      "LastProvisioned": null
+    },
+    {
+      "DeviceName": "larouex-ble-33-0002",
+      "Address": "fb:0a:8d:5f:79:e4",
+      "LastRSSI": "-55 dB",
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "LastProvisioned": null
+    }
+  ]
+}
+````
+That is an overview of  the purpose of scandevices.py: It finds advertising devices using BLEScan and and writes the data to the devicescache.json [LINK: devicescache.json](./devicescache.json). That is all that is does, we have not provisioned our devices as of yet in Azure Iot Central and that is our next step!
 
 I encourage you to look over the scandevices.py [LINK: scandevices.py](./scandevices.py) and the class that is uses to do all of the scanning and configuration [LINK: classes/scanfordevices.py](./classes/scanfordevices.py).
 
