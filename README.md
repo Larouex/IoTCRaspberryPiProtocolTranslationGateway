@@ -7,7 +7,7 @@ This repository is part of a training and project series for Azure IoT Central. 
 
 [LINK: Training & Project Site for Raspberry Pi Gateway and Arduino Nano BLE Devices for Azure Iot Central](http://www.hackinmakin.com/Raspberry%20Pi%20Gateway%20and%20BLE/index.html)
 
-This project will enable a Raspberry Pi to act as a "Translation" Gateway and supports a number of scenraios...
+This project will enable a Raspberry Pi to act as a "Translation" Gateway and supports a number of scenarios...
 
 * <b>Protocol Translation</b> - Translate the Bluetooth Notify and Charatertics Data into Json and send to Azure Iot Central.
 * <b>Protocol & Identity Translation</b> - Translate the Bluetooth Notify and Charatertics Data into Json and send to Azure Iot Central and create Leaf Devices for each BLE Device.
@@ -350,7 +350,7 @@ We are now ready!
 
 
 ## SECRETS!!! - Azure Connectivity and Protecting Your Secrets
-<b>NOTE:</b> You can skip this section if you do not plan to use Azuure Key Vault to Store and Access secrets.
+<b>NOTE:</b> You can skip this section if you do not plan to use Azure Key Vault to Store and Access secrets.
 
 Azure IoT Central is what we using for capturing Telemetry and Managing out Gateway and Devices. It is a powerful SaaS offering and we will be using the tools and visualizations to build out a rich application for our scenario. In order to connect our devices and gateway to IoT Central, we need to manage a set of secrets and we will store those secrets in Azure Key Vault. I highly recommend that you do this so you do not make a mistake and expose access to your application, gateway or devices.
 
@@ -375,7 +375,7 @@ Once these are all created in Key Vault, your list should look like this...
 https://docs.microsoft.com/en-us/azure/key-vault/certificates/quick-create-python
 
 ## Get Your Credentials for Azure Login
-<b>NOTE:</b> You can skip this section if you do not plan to use Azuure Key Vault to Store and Access secrets.
+<b>NOTE:</b> You can skip this section if you do not plan to use Azure Key Vault to Store and Access secrets.
 
 * Open a Terminal or Powershell session
 * Login to the Azure CLI...
@@ -409,52 +409,13 @@ az keyvault set-policy --name <your key vault url> --spn <your password> --secre
 ````
 
 ## Configure our Secrets for Local Development
-There is a file in the root folder of the project named "secrets_template.json" and this file outlines the shape of Json we use to retreive secrets. It supports local and Key Vault usage. 
+There is a file in the root folder of the project named "secrets_template.json" and this file outlines the shape of Json we use to retreive secrets. It supports Local Secrets and Key Vault usage. Copy the "secrets_template.json" to a new file named "secrets.json" in the root folder of the project. Open this file in Visual Studio Code and let's start configuring the options.
 
-````json
-{
-  "UseKeyVault": true,
-  "ProvisioningHost": "global.azure-devices-provisioning.net",
-  "LocalSecrets": {
-    "ScopeId": "",
-    "DeviceConnect":{
-      "SaSKeys":{
-          "Primary": "",
-          "Secondary": ""
-      }
-    },
-    "GatewayConnect":{
-      "SaSKeys":{
-          "Primary": "",
-          "Secondary": ""
-      }
-    }
-  },
-  "KeyVaultSecrets":{
-    "KeyVaultUri": "",
-    "TenantId":"",
-    "ClientId":"",
-    "ClientSecret":"",
-    "ScopeId": "raspberry-pi-protocol-translation-gateway-scopeid",
-    "DeviceConnect":{
-      "SaSKeys":{
-          "Primary": "raspberry-pi-protocol-translation-gateway-saskey-device-primary",
-          "Secondary": "raspberry-pi-protocol-translation-gateway-saskey-device-secondary"
-      }
-    },
-    "GatewayConnect":{
-      "SaSKeys":{
-          "Primary": "raspberry-pi-protocol-translation-gateway-saskey-gateway-primary",
-          "Secondary": "raspberry-pi-protocol-translation-gateway-saskey-gateway-secondary"
-      }
-    }
-  }
-}
-````
+<b>IMPORTANT: Make sure to check your .gitignore to verify that "secrets.json" is in the list so it does not get checked in! The file should be dithered in your Visual Studio Code Explorer window.</b>
 
-The fist thing we will do is copy the "secrets_template.json" to a new file named "secrets.json" in the root folder of the project. Open this file in Visual Studio Code and let's get to configuring the options.
 
 ### I want to use the security and awesomeness of Key Vault!
+See the Json below the bullets for reference...
 
 * Set "UseKeyVault" to true
 * From the Azure Portal, Goto your Key Vault Resource
@@ -467,7 +428,6 @@ The fist thing we will do is copy the "secrets_template.json" to a new file name
 * Repeat for all the secrets we setup previously and put into the right fields!
 
 <b>Your file should look like this when completed...</b>
-
 ````json
 {
   "UseKeyVault": true,
@@ -509,8 +469,6 @@ The fist thing we will do is copy the "secrets_template.json" to a new file name
 }
 ````
 Save the file and you can ignore the "LocalSecrets" section.
-
-<b>IMPORTANT: Make sure to check your .gitignore to verify that "secrets.json" is in the list so it does not get checked in! The file should be dithered in your Visual Studio Code Explorer window.</b>
 
 ### I don't want to use Key Vault!
 If you are working locally and do not want to implement the security and awesomeness of Key Vault, then go ahead and set "UseKeyVault" to false. Copy all our your SaS key values from the Admin, Device Connection page in IoT Central...
@@ -557,9 +515,6 @@ If you are working locally and do not want to implement the security and awesome
 ````
 Save the file and you can ignore the "KeyVaultSecrets" section.
 
-<b>IMPORTANT: Make sure to check your .gitignore to verify that "secrets.json" is in the list so it does not get checked in! The file should be dithered in your Visual Studio Code Explorer window.</b>
-
-
 ### Set up the Credentials in the Raspberry Pi
 Let's go back to a terminal window and setup the variables on the Raspberry Pi. Use the values from the generated Jasn to set AZURE_CLIENT_ID ("appId"), AZURE_CLIENT_SECRET ("password") and AZURE_TENANT_ID ("tenant") environment variables. 
 
@@ -569,23 +524,23 @@ export AZURE_CLIENT_SECRET="<your password>"
 export AZURE_TENANT_ID="<your tenant>"
 export AZURE_SUBSCRIPTION_ID="<your tenant>"
 ````
-
 Authorize the service principal to perform key operations in your Key Vault:
 
 https://www.bluetooth.com/specifications/assigned-numbers/generic-access-profile/
 
-## Provisioning BLE Devices
+## Scanning and Registering BLE Devices
+The next step is to turn on your BLE Devices and Scan for them using our Raspberry Pi Gateway. The scanning for BLE devices used BlueZ BLESCAN and this component requires SUDO access. I created the script to not require any installation of additional packages and also made it external to the primary gateway code.
 
+In your project, there is a configuration file at the root of the project folder called "devicecaches.json" and ths structure is shown below...
 ````json
 {
-  "DeviceNamePrefix": "larouex-ble-",
   "DeviceCapabilityModels": [
     {
-      "Name": "sense-",
+      "DeviceNamePrefix": "larouex-ble-sense-",
       "DCM": "urn:larouexiot:nanoble33sense:1"
     },
     {
-      "Name": "33-",
+      "DeviceNamePrefix": "larouex-ble-33-",
       "DCM": "urn:larouexiot:nanoble33:1"
     }
   ],
@@ -594,14 +549,40 @@ https://www.bluetooth.com/specifications/assigned-numbers/generic-access-profile
       "DeviceName": "Simulated Device",
       "Address": "6A:6A:6A:6A:6A:6A",
       "LastRSSI": "-91 dB",
-      "DCM": "urn:larouexiot:nanoble33:1"
-    },
-    {
-      "DeviceName": "larouex-ble-sense-0001",
-      "Address": "c7:94:90:1c:8f:3c",
-      "LastRSSI": "0 dB",
-      "DCM": "urn:larouexiot:nanoble33sense:1"
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "LastProvisioned": null
     }
   ]
 }
 ````
+Let's review the file stucture...
+
+#### DeviceCapabilityModels
+This section is the "pattern" match for your BLE devices. Let's jump back (if you have not built a Nano device in this project, you should do that now). In the Nano BLE projects, we have a file that is global to the project called "Platform.ini" and in the file we designate the following when building a device...
+
+````yaml
+[common_env_data]
+build_flags =
+    -D VERSION=1.0.0.1
+    -D DCM="urn:larouexiot:nanoble33:1"
+    -D DEVICE_NAME="larouex-ble-33-0002"
+    -D SERVICE_UUID="6F165338-0001-43B9-837B-41B1A3C86EC1"
+    -D DEBUG=1
+````
+So this section identifies the pattern that your device advertises via BLE...
+````json
+{
+  "DeviceCapabilityModels": [
+    {
+      "DeviceNamePrefix": "larouex-ble-sense-",
+      "DCM": "urn:larouexiot:nanoble33sense:1"
+    },
+    {
+      "DeviceNamePrefix": "larouex-ble-33-",
+      "DCM": "urn:larouexiot:nanoble33:1"
+    }
+  ],
+  ...
+````
+* DeviceNamePrefix - The naming pattern your BLE devices start with
+* DCM - The Device Capability Model Identity in IoT Central
