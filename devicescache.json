@@ -32,18 +32,18 @@
     {
       "DeviceName": "larouex-ble-sense-0001",
       "Address": "c7:94:90:1c:8f:3c",
-      "LastRSSI": "-70 dB",
-      "DCM": "urn:larouexiot:nanoble33:1",
+      "LastRSSI": "-64 dB",
+      "DCM": "urn:larouexiot:nanoble33sense:1",
       "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
       "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
-      "NanoBLEInterface": "urn:larouexiot:nanoble33:NanoBLE33Interface:1",
-      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33SenseInterface",
       "LastProvisioned": null
     },
     {
       "DeviceName": "larouex-ble-33-0002",
       "Address": "fb:0a:8d:5f:79:e4",
-      "LastRSSI": "-58 dB",
+      "LastRSSI": "-59 dB",
       "DCM": "urn:larouexiot:nanoble33:1",
       "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
       "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",

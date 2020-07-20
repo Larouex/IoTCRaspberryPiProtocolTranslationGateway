@@ -89,21 +89,21 @@ class ScanForDevices():
                   if devicename.startswith(name_dcm["DeviceNamePrefix"]):
                     self.logger.warning("[FOUND NEW DEVICE] %s" % devicename)
                     new_device = True
+
+                    newDevice = {
+                        "DeviceName": devicename, 
+                        "Address": str(device.addr), 
+                        "LastRSSI": "%s dB" % str(device.rssi),
+                        "DCM": name_dcm["DCM"],
+                        "DeviceInfoInterface": name_dcm["DeviceInfoInterface"],
+                        "DeviceInfoInterfaceInstanceName": name_dcm["DeviceInfoInterfaceInstanceName"],
+                        "NanoBLEInterface": name_dcm["NanoBLEInterface"],
+                        "NanoBLEInterfaceInstanceName": name_dcm["NanoBLEInterfaceInstanceName"],
+                        "LastProvisioned": None
+                      } 
                 
                 if new_device:
                   new_devices_discovered = True
-                  
-                  newDevice = {
-                      "DeviceName": devicename, 
-                      "Address": str(device.addr), 
-                      "LastRSSI": "%s dB" % str(device.rssi),
-                      "DCM": name_dcm["DCM"],
-                      "DeviceInfoInterface": name_dcm["DeviceInfoInterface"],
-                      "DeviceInfoInterfaceInstanceName": name_dcm["DeviceInfoInterfaceInstanceName"],
-                      "NanoBLEInterface": name_dcm["NanoBLEInterface"],
-                      "NanoBLEInterfaceInstanceName": name_dcm["NanoBLEInterfaceInstanceName"],
-                      "LastProvisioned": None
-                    } 
                   
                   # Associate the IoTC Device Template
                   self.logger.info("[NEW DEVICE INFO] %s" % newDevice)
