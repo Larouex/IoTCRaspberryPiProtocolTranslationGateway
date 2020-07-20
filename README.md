@@ -761,16 +761,12 @@ Let's get started at IoT Central and create an application [LINK: Welcome to IoT
   ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
 
 * Click "Create" button
-* 
+ 
   ![alt text](./Assets/transparent-gateway-iotc-save-device-template.png "Save Device Template")     
  
-
-
-  ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
-
 * Click the "Import capability model" Icon
 
-  ![alt text](./Assets/transparent-gateway-iotc-name-device-template.png "Name the Device Template")     
+  ![alt text](./Assets/transparent-gateway-iotc-import-dcm.png "Import DCM")     
  
 * Select the file named "nanoble33sense.json" from the location you cloned the project onto your desktop machine (i.e. ./IoTCRaspberryPiProtocolTranslationGateway/devicecapabilitymodels)
 
