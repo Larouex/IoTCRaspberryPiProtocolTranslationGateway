@@ -527,8 +527,8 @@ Authorize the service principal to perform key operations in your Key Vault:
 
 https://www.bluetooth.com/specifications/assigned-numbers/generic-access-profile/
 
-## Scanning and Registering BLE Devices
-The next step is to turn on your BLE Devices and Scan for them using our Raspberry Pi Gateway. The scanning for BLE devices used BlueZ BLESCAN and this component requires SUDO access. I created the script to not require any installation of additional packages and also made it external to the primary gateway code.
+## Scanning and Capturing BLE Devices
+The next step is to turn on your BLE Devices and Scan for them using our Raspberry Pi Gateway. The scanning for BLE devices used BlueZ BLESCAN and this component requires SUDO access. I created the script to not require any installation of additional packages and also made it an external script to the primary gateway code.
 
 ![alt text](./Assets/scan-devices-desktop.png "Scan Devices") 
 
@@ -589,7 +589,7 @@ This section in "devicescache.json" identifies the pattern that your device adve
 * <b>DeviceNamePrefix</b> - The naming pattern your BLE devices start with...
 * <b>DCM</b> - The Device Capability Model Identity in IoT Central
 
-#### Registering the Devices
+#### The Devices
 The Devices section of the file is an array of devices that match your naming pattern. There is a "dummy" record for a Simulated device and this is there for reference and is ignored in all situations.
 ````json
 {
@@ -605,13 +605,13 @@ The Devices section of the file is an array of devices that match your naming pa
   ]
 }
 ````
-Let's run our scan devices Python script and find our devices. I have two BLE devices running before I executed the script...
+Let's run our scan devices Python script to find our advertising devices. I currently have two BLE devices up and adverstising before I executed the script...
 
 * larouex-ble-sense-0001
 * larouex-ble-33-0002
 
 #### Scan Devices Options
-There are a few options for the Scan Device script that you can override...
+Here are the options for the Scan Device script that you can override...
 
 * <b>-h or --help</b> - Print out this Help Information
 * <b>-v or --verbose</b> -  Debug Mode with lots of Data will be Output to Assist with Debugging
@@ -656,3 +656,8 @@ WARNING: [ALREADY DISCOVERED, SKIPPING] larouex-ble-sense-0001
 WARNING: [ALREADY DISCOVERED, SKIPPING] larouex-ble-33-0002
 ````
 
+That is what the purpose of scandevices.py does: It finds advertising devices using BLEScan and and writes the data to the devicescache.json [LINK: devicescache.json](./devicescache.json). That is all that is does, we have not provisioned our devices as of yet in Azure Iot Central, that is our next step!
+
+I encourage you to look over the scandevices.py [LINK: scandevices.py](./scandevices.py) and the class that is uses to do all of the scanning and configuration [LINK: classes/scanfordevices.py](./classes/scanfordevices.py).
+
+## Provisioning our Devices in Azure IoT Central
