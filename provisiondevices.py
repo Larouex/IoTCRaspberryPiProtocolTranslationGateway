@@ -15,16 +15,13 @@ import  getopt, sys, time, string, threading, asyncio, os
 import logging as Log
 
 # our classes
-from classes.scanfordevices import ScanForDevices
+from classes.provisiondevices import ProvisionDevices
 from classes.config import Config
 
 # -------------------------------------------------------------------------------
-#   Scan For Devices
+#   Provision Devices
 # -------------------------------------------------------------------------------
-async def scan_for_devices(BluetoothInterface, ResetHCI, ScanSeconds):
-  if not 'SUDO_UID' in os.environ.keys():
-    print("[ERROR][STOPPED] Scanning Devices requires Super User Priveleges")
-    sys.exit(1)
+async def provision_devices(BluetoothInterface, ResetHCI, ScanSeconds):
 
   scanfordevices = ScanForDevices(Log, BluetoothInterface, ResetHCI, ScanSeconds)
   await scanfordevices.scan_for_devices()

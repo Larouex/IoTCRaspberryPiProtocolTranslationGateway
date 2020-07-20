@@ -722,3 +722,27 @@ That is an overview of  the purpose of scandevices.py: It finds advertising devi
 I encourage you to look over the scandevices.py [LINK: scandevices.py](./scandevices.py) and the class that is uses to do all of the scanning and configuration [LINK: classes/scanfordevices.py](./classes/scanfordevices.py).
 
 ## Provisioning our Devices in Azure IoT Central
+Provisioning follows the same pattern as ScanDevices in that we have separated this script into a "stand-alone" operation. 
+
+There are excellent tutorials on connecting devices to IoT Central and using Device Provisioning Services online and we won't try to repeat that here. If you are not familar, take a break and visit these topics...
+
+* [LINK: Get connected to Azure IoT Central](https://docs.microsoft.com/en-us/azure/iot-central/core/concepts-get-connected)
+* [LINK: Tutorial: Create and connect a client application to your Azure IoT Central application (Python)](https://docs.microsoft.com/en-us/azure/iot-central/core/tutorial-connect-device-python)
+
+Provisioning in our Gateway project is one of key pillars of capabilities we have created and we have lots of options so you can try the various Gateway scenarios. Let's look at the options...
+
+* <b>-h or --help</b> - Print out this Help Information
+* <b>-v or --verbose</b> -  Debug Mode with lots of Data will be Output to Assist with Debugging
+* <b>-p or --provisioningscope</b> - Provisioning Scope give you fine grained control over the devices you want to provision. 
+  * ALL - Re-Provision Every device listed in the DevicesCache.json file
+  * NEW - Only Provision Devices DevicesCache.json file that have "LastProvisioned=Null"
+  * <device name> - Provision a Specifc Device in DevicesCache.json file
+* <b>-g or --gatewaytype</b> - Indicate the Type of Gateway Relationship
+  * OPAQUE - Devices will look like Stand-Alone Devices in IoT Central
+  * TRANSPARENT - Devices will look like Stand-Alone Devices in IoT Central
+  * PROTOCOL - IoT Central will show a Single Gateway and all Data is Associated with the Gateway
+  * PROTOCOLWITHIDENTITY - IoT Central will show a Single Gateway and Leaf Devices
+
+
+
+ProvisioningScope
