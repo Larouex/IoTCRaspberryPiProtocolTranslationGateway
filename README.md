@@ -643,7 +643,7 @@ Here are the options for the Scan Device script that you can override...
 * <b>-s or --scanseconds</b> - Number of Seconds the BLE Scan should Scan for Devices (default=10)
 
 ````bash
-sudo python3 ./scandevices -v -r -b 0 - 12
+sudo python3 ./scandevices -v -r -b 0 -s 12
 >>>
 INFO: Verbose mode...
 INFO: Bluetooth Interface Override...0
@@ -664,7 +664,7 @@ INFO: Updated Devices Cache file: {...}
 ````
 Lot's of Information, let's run without the Debug INFO...
 ````bash
-sudo python3 ./scandevices -r -b 0 - 12
+sudo python3 ./scandevices.py -r -b 0 -s 12
 >>>
 WARNING: Please Wait: Scanning for BLE Devices Advertising...(12 Seconds)
 WARNING: [FOUND NEW DEVICE] larouex-ble-sense-0001
@@ -672,7 +672,7 @@ WARNING: [FOUND NEW DEVICE] larouex-ble-33-0002
 ````
 Nice and terse. Let's run it again for Idempotency...
 ````bash
-sudo python3 ./scandevices -r -b 0 - 12
+sudo python3 ./scandevices.py -r -b 0 -s 12
 >>>
 WARNING: Please Wait: Scanning for BLE Devices Advertising...(12 Seconds)
 WARNING: [ALREADY DISCOVERED, SKIPPING] larouex-ble-sense-0001
@@ -806,3 +806,24 @@ Provisioning in our Gateway project is one of key pillars of capabilities we hav
   * <b>PROTOCOL</b> - IoT Central will show a Single Gateway and all Data is Associated with the Gateway
   * <b>PROTOCOLWITHIDENTITY</b> - IoT Central will show a Single Gateway and Leaf Devices
 
+Let's provision a specific device from our devicescache.json...
+````json
+...
+    {
+      "DeviceName": "larouex-ble-sense-0001",
+      "Address": "c7:94:90:1c:8f:3c",
+      "LastRSSI": "-64 dB",
+      "DCM": "urn:larouexiot:nanoble33sense:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33SenseInterface",
+      "LastProvisioned": null
+    },
+...
+````
+
+Here is the command we are going to execute on our Raspberry Pi terminal...
+````bash
+python3 ./provisiondevices.py -v -p "larouex-ble-sense-0001" -g "TRANSPARENT"
+````

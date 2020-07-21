@@ -2,5 +2,6 @@
     "BluetoothInterface": 0,
     "ResetHCI": false,
     "ScanSeconds": 10.0,
-    "ProvisioningScope": "NEW"
+    "ProvisioningScope": "NEW",
+    "GatewayType": "TRANSPARENT"
 }

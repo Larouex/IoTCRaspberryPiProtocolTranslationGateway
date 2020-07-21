@@ -21,19 +21,20 @@ from classes.config import Config
 # -------------------------------------------------------------------------------
 #   Provision Devices
 # -------------------------------------------------------------------------------
-async def provision_devices(BluetoothInterface, ResetHCI, ScanSeconds):
+async def provision_devices(ProvisioningScope, GatewayType):
 
-  scanfordevices = ScanForDevices(Log, BluetoothInterface, ResetHCI, ScanSeconds)
-  await scanfordevices.scan_for_devices()
+  provisiondevices = ProvisionDevices(Log, ProvisioningScope, GatewayType)
+  await provisiondevices.provision_devices()
   return True
 
 async def main(argv):
 
     # execution state from args
-    reprovision_all_devices = None
+    provisioning_scope = None
+    gateway_type = None
 
-    short_options = "hva"
-    long_options = ["help", "verbose", "all"]
+    short_options = "hvp:g:"
+    long_options = ["help", "verbose", "provisioningscope=", "gatewaytype="]
     full_cmd_arguments = sys.argv
     argument_list = full_cmd_arguments[1:]
     try:
@@ -47,28 +48,43 @@ async def main(argv):
             print("------------------------------------------------------------------------------------------------------------------")
             print("-h or --help - Print out this Help Information")
             print("-v or --verbose - Debug Mode with lots of Data will be Output to Assist with Debugging")
-            print("-a or --all - Re-Provision all Devices with IoT Central (default=LastProvisioned(null))")
+            print("-p or --provisioningscope - Provisioning Scope give you fine grained control over the devices you want to provision.")
+            print("    ALL - Re-Provision Every device listed in the DevicesCache.json file")
+            print("    NEW - Only Provision Devices DevicesCache.json file that have 'LastProvisioned=Null'")
+            print("    device name - Provision a Specifc Device in DevicesCache.json file")
+            print("-g or --gatewaytype - Indicate the Type of Gateway Relationship")
+            print("    OPAQUE - Devices will look like Stand-Alone Devices in IoT Central")
+            print("    TRANSPARENT - Devices will look like Stand-Alone Devices in IoT Central")
+            print("    PROTOCOL - IoT Central will show a Single Gateway and all Data is Associated with the Gateway")
+            print("    PROTOCOLWITHIDENTITY - IoT Central will show a Single Gateway and Leaf Devices")
             print("------------------------------------------------------------------------------------------------------------------")
             sys.exit()
-
+        
         if current_argument in ("-v", "--verbose"):
             Log.basicConfig(format="%(levelname)s: %(message)s", level=Log.DEBUG)
             Log.info("Verbose mode...")
         else:
             Log.basicConfig(format="%(levelname)s: %(message)s")
         
-        if current_argument in ("-a", "--all"):
-            Log.info("Re-Provision All Devices mode...")
-            is_resethci = True
-        
+        if current_argument in ("-p", "--provisioningscope"):
+            Log.info("Provisioning Scope Override...%s" % current_value)
+            provisioning_scope = current_value
+
+        if current_argument in ("-g", "--gatewaytype"):
+            Log.info("Gateway Type  Override...%s" % current_value)
+            gateway_type = current_value
+
     # Load Configuration File
     config = Config(Log)
     config_data = config.data
     
-    if reprovision_all_devices == None:
-      reprovision_all_devices = config_data["ReprovisionAllDevices"]
+    if provisioning_scope == None:
+      provisioning_scope = config_data["ProvisioningScope"]
 
-    await scan_for_devices(BluetoothInterface=bluetooth_interface, ResetHCI=is_resethci, ScanSeconds=scan_seconds)
+    if gateway_type == None:
+      gateway_type = config_data["GatewayType"]
+
+    await provision_devices(ProvisioningScope=provisioning_scope, GatewayType=gateway_type)
 
 if __name__ == "__main__":
     asyncio.run(main(sys.argv[1:]))
