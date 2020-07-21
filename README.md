@@ -827,3 +827,7 @@ Here is the command we are going to execute on our Raspberry Pi terminal...
 ````bash
 python3 ./provisiondevices.py -v -p "larouex-ble-sense-0001" -g "TRANSPARENT"
 ````
+
+The Device is Registered!
+
+![alt text](./Assets/transparent-gateway-iotc-single-device-provisioned.png "Device Provisioned")
