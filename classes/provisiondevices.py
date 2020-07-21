@@ -169,6 +169,20 @@ class ProvisionDevices():
                     } 
                     self.data["Devices"].append(newDevice)
                     continue
+                else:
+                    newDevice = {
+                      "DeviceName": device["DeviceName"], 
+                      "Address": device["Address"], 
+                      "LastRSSI": device["LastRSSI"],
+                      "DCM": device["DCM"],                    
+                      "DeviceInfoInterface": device["DeviceInfoInterface"],
+                      "DeviceInfoInterfaceInstanceName": device["DeviceInfoInterfaceInstanceName"],
+                      "NanoBLEInterface": device["NanoBLEInterface"],
+                      "NanoBLEInterfaceInstanceName": device["NanoBLEInterfaceInstanceName"],
+                      "LastProvisioned": None
+                    } 
+                    self.data["Devices"].append(newDevice)
+                    continue
 
         except Exception as ex:
             self.logger.error("[ERROR] %s" % ex)

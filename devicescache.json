@@ -1,0 +1,55 @@
+{
+  "DeviceCapabilityModels": [
+    {
+      "DeviceNamePrefix": "larouex-ble-sense-",
+      "DCM": "urn:larouexiot:nanoble33sense:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33SenseInterface"
+    },
+    {
+      "DeviceNamePrefix": "larouex-ble-33-",
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33:NanoBLE33Interface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface"
+    }
+  ],
+  "Devices": [
+    {
+      "DeviceName": "Simulated Device",
+      "Address": "6A:6A:6A:6A:6A:6A",
+      "LastRSSI": "-91 dB",
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface",
+      "LastProvisioned": null
+    },
+    {
+      "DeviceName": "larouex-ble-sense-0001",
+      "Address": "c7:94:90:1c:8f:3c",
+      "LastRSSI": "-66 dB",
+      "DCM": "urn:larouexiot:nanoble33sense:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33sense:NanoBLE33SenseInterface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33SenseInterface",
+      "LastProvisioned": "2020-07-20 18:30:01.742075"
+    },
+    {
+      "DeviceName": "larouex-ble-33-0002",
+      "Address": "fb:0a:8d:5f:79:e4",
+      "LastRSSI": "-51 dB",
+      "DCM": "urn:larouexiot:nanoble33:1",
+      "DeviceInfoInterface": "urn:azureiot:DeviceManagement:DeviceInformation:1",
+      "DeviceInfoInterfaceInstanceName": "DeviceInformationInterface",
+      "NanoBLEInterface": "urn:larouexiot:nanoble33:NanoBLE33Interface:1",
+      "NanoBLEInterfaceInstanceName": "NanoBLE33Interface",
+      "LastProvisioned": null
+    }
+  ]
+}
